@@ -969,3 +969,28 @@ a:hover{color:#9a4b00;text-decoration:none}
 @media(max-width:1180px){.reviews-slider,.reviews-page-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.quiz-next,.quiz-submit{min-width:170px}.mega-menu{pointer-events:auto}}
 @media(max-width:860px){.reviews-slider,.reviews-page-grid{grid-template-columns:1fr!important}.quiz-controls{grid-template-columns:auto auto!important}.quiz-next,.quiz-submit{min-width:150px}.check--policy{grid-template-columns:36px 1fr!important}.check--policy input{width:30px!important;height:30px!important}}
 @media(max-width:560px){.quiz-controls{gap:12px}.quiz-next,.quiz-submit{min-width:132px}.check--policy{padding:12px 14px!important}.reviews-map-buttons .btn{width:100%!important}}
+
+
+/* === v3.4 final fixes === */
+.hero-trust{display:none!important}
+.owner-block__content > .eyebrow{margin-bottom:8px!important}
+.owner-block__content > h2{margin-top:0!important;margin-bottom:18px!important}
+.quiz-controls{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;gap:16px!important;margin-top:28px!important}
+.quiz-prev{justify-self:auto!important;flex:0 0 auto!important}
+.quiz-controls__right{display:grid!important;grid-template-columns:1fr!important;justify-self:auto!important;margin-left:auto!important;flex:0 0 auto!important}
+.quiz-next,.quiz-submit{grid-column:1!important;grid-row:1!important;min-width:190px!important;justify-self:end!important}
+.quiz-prev.is-control-hidden{visibility:hidden!important;opacity:0!important;pointer-events:none!important;display:inline-flex!important}
+.quiz-next.is-control-hidden,.quiz-submit.is-control-hidden{visibility:hidden!important;opacity:0!important;pointer-events:none!important;display:inline-flex!important}
+.reviews-slider{cursor:grab;user-select:none;touch-action:pan-y;transition:opacity .22s ease, transform .22s ease}
+.reviews-slider.is-dragging{cursor:grabbing;opacity:.92}
+.review-slide{transition:opacity .32s ease, transform .32s ease, box-shadow .22s ease!important}
+.review-slide.is-visible{animation:reviewFade .32s ease both}
+@keyframes reviewFade{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+.back-to-top{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#ff7a00,#ffb36b);color:#fff;font-size:1.55rem;font-weight:900;box-shadow:0 18px 36px rgba(255,122,0,.28);z-index:900;opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .25s ease,visibility .25s ease,transform .25s ease,box-shadow .25s ease;border:1px solid rgba(255,255,255,.45)}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
+.back-to-top:hover{transform:translateY(-4px);box-shadow:0 24px 46px rgba(255,122,0,.34)}
+.modal{z-index:20000!important}
+.modal__dialog{z-index:20001!important}
+.modal__close{z-index:20002!important}
+@media(max-width:860px){.quiz-next,.quiz-submit{min-width:150px!important}.back-to-top{right:16px;bottom:16px;width:52px;height:52px;border-radius:17px}}
+@media(max-width:560px){.quiz-controls{gap:10px!important}.quiz-next,.quiz-submit{min-width:132px!important}.quiz-prev{min-width:112px!important}.back-to-top{right:14px;bottom:14px}}

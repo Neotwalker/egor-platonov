@@ -155,25 +155,60 @@
   }));
 
 
-  // Reviews slider by pages
+  // Reviews slider: loop, pages and drag/swipe
   const reviewSlider = document.querySelector('[data-reviews-slider]');
   if(reviewSlider){
     const slides = [...reviewSlider.querySelectorAll('.review-slide')];
     const prev = document.querySelector('.review-prev');
     const next = document.querySelector('.review-next');
-    let currentPage = 0;
+    let currentIndex = 0;
+    let startX = 0;
+    let isDragging = false;
     const perPage = () => window.innerWidth <= 860 ? 1 : (window.innerWidth <= 1180 ? 2 : 3);
-    const pages = () => Math.max(1, Math.ceil(slides.length / perPage()));
-    const showPage = (idx)=>{
-      currentPage = (idx + pages()) % pages();
-      const start = currentPage * perPage();
-      const end = start + perPage();
-      slides.forEach((slide, i)=>slide.classList.toggle('is-visible', i >= start && i < end));
+    const normalize = (idx) => ((idx % slides.length) + slides.length) % slides.length;
+    const showFrom = (idx, direction = 1) => {
+      if(!slides.length) return;
+      currentIndex = normalize(idx);
+      const count = Math.min(perPage(), slides.length);
+      const visible = new Set(Array.from({length: count}, (_, n) => normalize(currentIndex + n)));
+      reviewSlider.style.transform = `translateX(${direction > 0 ? '6px' : '-6px'})`;
+      reviewSlider.style.opacity = '0.86';
+      requestAnimationFrame(()=>{
+        slides.forEach((slide, i)=>slide.classList.toggle('is-visible', visible.has(i)));
+        requestAnimationFrame(()=>{
+          reviewSlider.style.transform = 'translateX(0)';
+          reviewSlider.style.opacity = '1';
+        });
+      });
     };
-    prev && prev.addEventListener('click', ()=>showPage(currentPage - 1));
-    next && next.addEventListener('click', ()=>showPage(currentPage + 1));
-    window.addEventListener('resize', ()=>showPage(Math.min(currentPage, pages()-1)));
-    showPage(0);
+    const move = (direction) => showFrom(currentIndex + direction * perPage(), direction);
+    prev && prev.addEventListener('click', ()=>move(-1));
+    next && next.addEventListener('click', ()=>move(1));
+    reviewSlider.addEventListener('pointerdown', (e)=>{
+      isDragging = true;
+      startX = e.clientX;
+      reviewSlider.classList.add('is-dragging');
+      reviewSlider.setPointerCapture && reviewSlider.setPointerCapture(e.pointerId);
+    });
+    reviewSlider.addEventListener('pointerup', (e)=>{
+      if(!isDragging) return;
+      isDragging = false;
+      reviewSlider.classList.remove('is-dragging');
+      const dx = e.clientX - startX;
+      if(Math.abs(dx) > 45) move(dx < 0 ? 1 : -1);
+    });
+    reviewSlider.addEventListener('pointercancel', ()=>{isDragging=false;reviewSlider.classList.remove('is-dragging');});
+    window.addEventListener('resize', ()=>showFrom(currentIndex, 1));
+    showFrom(0, 1);
+  }
+
+  // Back to top button
+  const backToTop = document.querySelector('.back-to-top');
+  if(backToTop){
+    const toggleBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 520);
+    window.addEventListener('scroll', toggleBackToTop, {passive:true});
+    backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    toggleBackToTop();
   }
 
   // Comparison slider
@@ -215,23 +250,6 @@
     points.forEach(p=>L.marker(p.coords).addTo(map).bindPopup(p.text));
     setTimeout(()=>map.invalidateSize(), 600);
   }
-
-  // v3.2 final UI guards
-  const quizPrevGuard = document.querySelector('.quiz-prev');
-  const quizNextGuard = document.querySelector('.quiz-next');
-  const quizSubmitGuard = document.querySelector('.quiz-submit');
-  const quizStepsGuard = [...document.querySelectorAll('.quiz-step')];
-  const syncQuizButtons = () => {
-    const activeIndex = Math.max(0, quizStepsGuard.findIndex(s => s.classList.contains('is-active')));
-    if(quizPrevGuard){ quizPrevGuard.hidden = activeIndex === 0; quizPrevGuard.disabled = activeIndex === 0; }
-    if(quizNextGuard){ quizNextGuard.hidden = activeIndex === quizStepsGuard.length - 1; }
-    if(quizSubmitGuard){ quizSubmitGuard.hidden = activeIndex !== quizStepsGuard.length - 1; }
-  };
-  if(quizStepsGuard.length){
-    syncQuizButtons();
-    document.querySelectorAll('.quiz-prev,.quiz-next').forEach(b => b.addEventListener('click', () => setTimeout(syncQuizButtons, 0)));
-  }
-
 
   // Make service cards fully clickable
   document.querySelectorAll('.service-card').forEach(card=>{
