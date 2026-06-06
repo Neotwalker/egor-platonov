@@ -24,3 +24,7 @@
 
 ## v3.5
 - Блок отзывов переведен на Swiper: loop, drag/swipe, 3/2/1 видимых слайда по брейкпоинтам.
+
+
+## v3.6
+- Исправлен конфликт старого CSS `.review-slide { display:none!important; }` со Swiper.
