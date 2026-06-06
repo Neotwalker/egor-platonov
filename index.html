@@ -63,7 +63,10 @@
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:+79000000000">+7 900 000-00-00</a>
-      <a class="btn btn--soft" href="https://wa.me/79000000000" target="_blank" rel="noopener">WhatsApp</a>
+      <div class="header-socials">
+        <a class="social-btn social-btn--wa" href="https://wa.me/79000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/img/icon-whatsapp.svg" alt=""></a>
+        <a class="social-btn social-btn--tg" href="https://t.me/username" target="_blank" rel="noopener" aria-label="Telegram"><img src="assets/img/icon-telegram.svg" alt=""></a>
+      </div>
       <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -108,11 +111,11 @@
   </section>
 
   <section class="section trust-bar reveal">
-    <div class="container trust-bar__grid">
-      <article class="trust-tile"><img src="assets/img/icon-contract.svg" alt="Работа по договору"><div><h3>Договор без серых зон</h3><p>Сроки, этапы, гарантия, ответственность и смета фиксируются письменно.</p></div></article>
-      <article class="trust-tile"><img src="assets/img/icon-estimate.svg" alt="Прозрачная смета"><div><h3>Смета без воздуха</h3><p>Разбиваем стоимость по блокам, чтобы клиент видел, за что платит.</p></div></article>
-      <article class="trust-tile"><img src="assets/img/icon-camera.svg" alt="Фотоотчеты"><div><h3>Регулярные фотоотчеты</h3><p>Показываем динамику работ и не оставляем объект «за кулисами».</p></div></article>
-      <article class="trust-tile"><img src="assets/img/icon-shield.svg" alt="Гарантия"><div><h3>Гарантия до 24 месяцев</h3><p>Гарантийные обязательства прописываются в договоре по каждому проекту.</p></div></article>
+    <div class="container trust-bar__grid trust-bar__grid--premium">
+      <article class="trust-tile trust-tile--premium"><div class="trust-tile__icon"><img src="assets/img/icon-contract.svg" alt="Работа по договору"></div><div><span>01</span><h3>Договор без серых зон</h3><p>Сроки, этапы, гарантия, ответственность и смета фиксируются письменно до старта работ.</p></div></article>
+      <article class="trust-tile trust-tile--premium"><div class="trust-tile__icon"><img src="assets/img/icon-estimate.svg" alt="Прозрачная смета"></div><div><span>02</span><h3>Смета без воздуха</h3><p>Стоимость разбита по блокам: работы, материалы, этапы и дополнительные решения.</p></div></article>
+      <article class="trust-tile trust-tile--premium"><div class="trust-tile__icon"><img src="assets/img/icon-camera.svg" alt="Фотоотчеты"></div><div><span>03</span><h3>Фотоотчеты по объекту</h3><p>Показываем динамику работ сами — без постоянных просьб и лишних звонков.</p></div></article>
+      <article class="trust-tile trust-tile--premium"><div class="trust-tile__icon"><img src="assets/img/icon-shield.svg" alt="Гарантия"></div><div><span>04</span><h3>Гарантия до 24 месяцев</h3><p>Гарантийные обязательства прописываются в договоре и не остаются обещанием на словах.</p></div></article>
     </div>
   </section>
 
@@ -128,7 +131,7 @@
         <div class="owner-points">
           <article class="card"><img src="assets/img/icon-worker.svg" alt=""><h3>Контроль собственника</h3><p>Не просто отдел продаж, а живой человек, который отвечает за объект и решение сложных вопросов.</p></article>
           <article class="card"><img src="assets/img/icon-materials.svg" alt=""><h3>Материалы без хаоса</h3><p>Помогаем комплектовать объект, оптимизируем закупки и не оставляем клиента один на один со снабжением.</p></article>
-          <article class="card"><img src="assets/img/icon-deadline.svg" alt=""><h3>Сроки под контролем</h3><p>Фиксируем этапы, отслеживаем выполнение и вовремя показываем, где находится проект сейчас.</p></article>
+          <article class="card owner-point--wide"><img src="assets/img/icon-deadline.svg" alt=""><h3>Сроки под контролем</h3><p>Фиксируем этапы, отслеживаем выполнение и вовремя показываем, где находится проект сейчас.</p></article>
         </div>
       </div>
     </div>
@@ -142,7 +145,7 @@
           <h2>6 ключевых услуг на главной</h2>
           <p>Чтобы пользователю было легко стартовать, на главной показываем самые частые запросы. Остальные направления вынесены в отдельный архив услуг.</p>
         </div>
-        <a class="btn btn--ghost" href="services/index.html">Перейти в архив услуг</a>
+        <a class="btn btn--archive" href="services/index.html">Перейти в архив услуг <span>↗</span></a>
       </div>
       <div class="service-grid">
     <article class="service-card card tilt-card">
@@ -337,7 +340,7 @@
         <button class="case-filter__btn" type="button" data-filter="commercial">Коммерция</button>
         <button class="case-filter__btn" type="button" data-filter="industrial">Производство</button>
       </div>
-      <div class="case-grid"><article class="case-card card tilt-card" data-case-type="apartment"><div class="case-card__image"><img src="assets/img/case-apartment.webp" alt="Квартира 92 м² в новостройке"><span>ЖК «Ньютон»</span></div><div class="case-card__body"><h3>Квартира 92 м² в новостройке</h3><div class="case-card__meta"><span>68 дней</span><span>92 м²</span><span>под ключ</span></div><p>Демонтаж, электрика, сантехника, штукатурка, шпаклевка, чистовая отделка и сдача объекта.</p><button class="text-link" data-modal="Получить похожий расчет">Хочу похожий проект</button></div></article><article class="case-card card tilt-card" data-case-type="house"><div class="case-card__image"><img src="assets/img/case-apartment.webp" alt="Дом 146 м²"><span>Коттеджный поселок</span></div><div class="case-card__body"><h3>Дом 146 м²</h3><div class="case-card__meta"><span>94 дня</span><span>146 м²</span><span>семейный дом</span></div><p>Комплексный ремонт загородного дома: инженерия, отделка, санузлы, декоративные покрытия и подготовка к заселению.</p><button class="text-link" data-modal="Получить похожий расчет">Хочу похожий проект</button></div></article><article class="case-card card tilt-card" data-case-type="commercial"><div class="case-card__image"><img src="assets/img/case-commercial.webp" alt="Коммерческое помещение 310 м²"><span>Шоурум / офис</span></div><div class="case-card__body"><h3>Коммерческое помещение 310 м²</h3><div class="case-card__meta"><span>45 дней</span><span>310 м²</span><span>без простоя</span></div><p>Отделка, перегородки ГКЛ, электрика, сантехника и подготовка помещения к запуску.</p><button class="text-link" data-modal="Получить похожий расчет">Хочу похожий проект</button></div></article><article class="case-card card tilt-card" data-case-type="industrial"><div class="case-card__image"><img src="assets/img/case-industrial.webp" alt="Производственный объект 1 250 м²"><span>Склад / производство</span></div><div class="case-card__body"><h3>Производственный объект 1 250 м²</h3><div class="case-card__meta"><span>этапами</span><span>1 250 м²</span><span>документы и контроль</span></div><p>Работы для завода, склада и распределительного центра с документацией, графиком и отчетностью.</p><button class="text-link" data-modal="Получить похожий расчет">Хочу похожий проект</button></div></article></div>
+      <div class="case-grid"><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Получить расчет по похожему объекту" data-case-type="apartment"><div class="case-card__image"><img src="assets/img/case-apartment.webp" alt="Квартира 92 м² в новостройке"><span>ЖК «Ньютон»</span></div><div class="case-card__body"><h3>Квартира 92 м² в новостройке</h3><div class="case-card__meta"><span>68 дней</span><span>92 м²</span><span>под ключ</span></div><p>Демонтаж, электрика, сантехника, штукатурка, шпаклевка, чистовая отделка и сдача объекта.</p><span class="text-link">Хочу похожий проект</span></div></article><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Получить расчет по похожему объекту" data-case-type="house"><div class="case-card__image"><img src="assets/img/case-apartment.webp" alt="Дом 146 м²"><span>Коттеджный поселок</span></div><div class="case-card__body"><h3>Дом 146 м²</h3><div class="case-card__meta"><span>94 дня</span><span>146 м²</span><span>семейный дом</span></div><p>Комплексный ремонт загородного дома: инженерия, отделка, санузлы, декоративные покрытия и подготовка к заселению.</p><span class="text-link">Хочу похожий проект</span></div></article><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Получить расчет по похожему объекту" data-case-type="commercial"><div class="case-card__image"><img src="assets/img/case-commercial.webp" alt="Коммерческое помещение 310 м²"><span>Шоурум / офис</span></div><div class="case-card__body"><h3>Коммерческое помещение 310 м²</h3><div class="case-card__meta"><span>45 дней</span><span>310 м²</span><span>без простоя</span></div><p>Отделка, перегородки ГКЛ, электрика, сантехника и подготовка помещения к запуску.</p><span class="text-link">Хочу похожий проект</span></div></article><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Получить расчет по похожему объекту" data-case-type="industrial"><div class="case-card__image"><img src="assets/img/case-industrial.webp" alt="Производственный объект 1 250 м²"><span>Склад / производство</span></div><div class="case-card__body"><h3>Производственный объект 1 250 м²</h3><div class="case-card__meta"><span>этапами</span><span>1 250 м²</span><span>документы и контроль</span></div><p>Работы для завода, склада и распределительного центра с документацией, графиком и отчетностью.</p><span class="text-link">Хочу похожий проект</span></div></article></div>
     </div>
   </section>
 
@@ -370,14 +373,20 @@
 
   <section class="section" id="b2b">
     <div class="container reveal">
-      <div class="b2b-block card">
-        <div>
+      <div class="b2b-block b2b-block--premium card">
+        <div class="b2b-block__content">
           <span class="eyebrow">Для бизнеса и коммерческих клиентов</span>
-          <h2>Ремонт коммерческих помещений без ощущения хаоса</h2>
-          <p>Работаем с офисами, магазинами, шоурумами, кафе, складами и производственными объектами. Подготавливаем помещения к запуску, берем на себя отделку, инженерные работы и понятную отчетность по проекту.</p>
+          <h2>Коммерческий ремонт, который не мешает запуску бизнеса</h2>
+          <p>Подготавливаем офисы, магазины, шоурумы, кафе, склады и производственные помещения к работе: отделка, инженерия, документы, понятные сроки и контроль по этапам.</p>
+          <button class="btn btn--brand" data-modal="Получить КП для коммерческого объекта" data-b2b="Коммерческий объект">Получить КП для бизнеса</button>
         </div>
-        <div class="b2b-list">
-          <span>Офисы</span><span>Магазины</span><span>Кафе</span><span>Шоурумы</span><span>Склады</span><span>Производственные помещения</span>
+        <div class="b2b-list b2b-list--modal">
+          <button type="button" data-b2b="Офисы" data-modal="Рассчитать ремонт офиса"><img src="assets/img/icon-tower.svg" alt=""><span>Офисы</span><em>рабочие зоны, переговорные, кабинеты</em></button>
+          <button type="button" data-b2b="Магазины" data-modal="Рассчитать ремонт магазина"><img src="assets/img/icon-finish.svg" alt=""><span>Магазины</span><em>торговые залы и входные группы</em></button>
+          <button type="button" data-b2b="Кафе" data-modal="Рассчитать ремонт кафе"><img src="assets/img/icon-water.svg" alt=""><span>Кафе</span><em>залы, кухни, санузлы, инженерия</em></button>
+          <button type="button" data-b2b="Шоурумы" data-modal="Рассчитать ремонт шоурума"><img src="assets/img/icon-sparkle.svg" alt=""><span>Шоурумы</span><em>пространства под продажи и бренд</em></button>
+          <button type="button" data-b2b="Склады" data-modal="Рассчитать ремонт склада"><img src="assets/img/icon-layers.svg" alt=""><span>Склады</span><em>логистика, хранение, технические зоны</em></button>
+          <button type="button" data-b2b="Производственные помещения" data-modal="Рассчитать ремонт производства"><img src="assets/img/icon-contract.svg" alt=""><span>Производство</span><em>объекты с повышенной нагрузкой</em></button>
         </div>
       </div>
     </div>
@@ -392,7 +401,7 @@
           <p>Сделали этапы более креативными: визуальная линия движения помогает быстро понять весь путь клиента.</p>
         </div>
       </div>
-      <div class="timeline">
+      <div class="timeline timeline--scroll" aria-label="Этапы работы">
         <article class="timeline-item"><b>01</b><h3>Заявка</h3><p>Вы оставляете заявку или пишете в мессенджер.</p></article>
         <article class="timeline-item"><b>02</b><h3>Консультация</h3><p>Уточняем формат объекта, сроки и задачу.</p></article>
         <article class="timeline-item"><b>03</b><h3>Выезд</h3><p>Осматриваем объект, фиксируем вводные и пожелания.</p></article>
@@ -408,40 +417,26 @@
     <div class="container reveal">
       <div class="section-head">
         <div>
-          <span class="eyebrow">Отзывы и видеообращение</span>
-          <h2>Больше доверия: видео, отзывы с площадок и живые комментарии клиентов</h2>
-          <p>Блок перестроен так, чтобы пользователю было понятно, где посмотреть видеообращение, где отзывы, и как перейти на внешние площадки.</p>
+          <span class="eyebrow">Отзывы клиентов</span>
+          <h2>Отзывы о ремонте, сроках и коммуникации</h2>
+          <p>Оптимизированный слайдер без тяжелого видео: дата, абстрактная аватарка, тип объекта и короткий отзыв.</p>
         </div>
+        <div class="review-controls"><button class="review-prev" type="button" aria-label="Предыдущий отзыв">←</button><button class="review-next" type="button" aria-label="Следующий отзыв">→</button></div>
       </div>
-      <div class="reviews-layout">
-        <div class="video-card card">
-          <div class="video-card__poster">
-            <img src="assets/img/owner.webp" alt="Видеообращение руководителя">
-            <button class="video-play" type="button" data-modal="Запросить консультацию">▶</button>
-          </div>
-          <div class="video-card__body">
-            <h3>Видеообращение руководителя</h3>
-            <p>Коротко объясняем, как работаем, почему фиксируем смету, как проходит контроль проекта и что получает клиент на выходе.</p>
-            <div class="map-buttons">
-              <a class="btn btn--ghost" href="https://go.2gis.com/" target="_blank" rel="noopener">Перейти в 2ГИС</a>
-              <a class="btn btn--ghost" href="https://yandex.ru/maps/56/chelyabinsk/" target="_blank" rel="noopener">Яндекс Карты</a>
-            </div>
-          </div>
-        </div>
-        <div class="reviews-stack"><article class="review-card card"><div class="review-card__top"><img src="assets/img/icon-quote.svg" alt=""><div><h3>Ремонт квартиры</h3><span>Анна, ЖК «Ньютон»</span></div></div><p>Смета была прозрачной, а по фотоотчетам было видно, как движется работа. Сдали в срок и без неприятных сюрпризов.</p></article><article class="review-card card"><div class="review-card__top"><img src="assets/img/icon-quote.svg" alt=""><div><h3>Коммерческий объект</h3><span>Игорь, владелец шоурума</span></div></div><p>Подготовили помещение к запуску бизнеса без затяжек. Удобно, что все инженерные и отделочные работы закрыли одной командой.</p></article><article class="review-card card"><div class="review-card__top"><img src="assets/img/icon-quote.svg" alt=""><div><h3>Частный дом</h3><span>Сергей, частный дом</span></div></div><p>Понравился человеческий подход: подробно объяснили, как будет проходить ремонт, помогли с материалами и не потерялись после предоплаты.</p></article><div class="rating-panel card"><strong>4.9/5</strong><p>Сильнее всего нам доверяют за прозрачную коммуникацию, соблюдение договоренностей и нормальный человеческий подход к объекту.</p></div></div>
+      <div class="reviews-slider" data-reviews-slider>
+        <article class="review-slide card is-active"><div class="review-avatar">А</div><div class="review-slide__body"><div class="review-meta"><strong>Анна</strong><span>14 мая 2026</span></div><p>Смета была прозрачной, а по фотоотчетам было видно, как движется работа. Сдали в срок и без неприятных сюрпризов.</p><em>Ремонт квартиры в новостройке</em></div></article>
+        <article class="review-slide card"><div class="review-avatar">И</div><div class="review-slide__body"><div class="review-meta"><strong>Игорь</strong><span>02 апреля 2026</span></div><p>Подготовили помещение к запуску бизнеса без затяжек. Удобно, что инженерные и отделочные работы закрыли одной командой.</p><em>Коммерческое помещение</em></div></article>
+        <article class="review-slide card"><div class="review-avatar">С</div><div class="review-slide__body"><div class="review-meta"><strong>Сергей</strong><span>18 марта 2026</span></div><p>Понравился человеческий подход: подробно объяснили процесс, помогли с материалами и не потерялись после предоплаты.</p><em>Ремонт частного дома</em></div></article>
+        <article class="review-slide card"><div class="review-avatar">М</div><div class="review-slide__body"><div class="review-meta"><strong>Марина</strong><span>27 февраля 2026</span></div><p>Самое ценное — спокойная коммуникация. Все решения согласовывали заранее, а спорные моменты закрывали без давления.</p><em>Отделка квартиры</em></div></article>
+      </div>
+      <div class="map-buttons reviews-map-buttons">
+        <a class="btn btn--ghost" href="https://go.2gis.com/" target="_blank" rel="noopener">Отзывы в 2ГИС</a>
+        <a class="btn btn--ghost" href="https://yandex.ru/maps/56/chelyabinsk/" target="_blank" rel="noopener">Отзывы на Яндекс Картах</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container reveal">
-      <div class="utility-grid">
-        <article class="card"><img src="assets/img/icon-docs.svg" alt=""><h3>Документы</h3><p>Реквизиты, договор, гарантийные обязательства и закрывающие документы по проекту.</p></article>
-        <article class="card"><img src="assets/img/icon-video.svg" alt=""><h3>Видео объектов</h3><p>Место для роликов процесса ремонта, обзоров готовых объектов и видеоотзывов.</p></article>
-        <article class="card"><img src="assets/img/icon-map.svg" alt=""><h3>Карта объектов</h3><p>Интерактивная карта с проектами в Челябинске, области и на коммерческих площадках.</p></article>
-      </div>
-    </div>
-  </section>
+
 
   <section class="section" id="map-seo">
     <div class="container reveal">
@@ -451,8 +446,8 @@
         </div>
         <div class="map-seo__content">
           <span class="eyebrow">Интерактивная карта и локальное SEO</span>
-          <h2>Строительная компания в Челябинске: работаем по городу, области и коммерческим площадкам</h2>
-          <p>Добавили живую карту с несколькими типами объектов, чтобы усилить восприятие реального присутствия компании на рынке. Рядом — SEO-текст, который помогает закрыть региональные и коммерческие интенты пользователя.</p>
+          <h2>Ремонт и строительство в Челябинске с понятной картой объектов</h2>
+          <p>Карта помогает быстро показать географию работ, а SEO-блок рядом закрывает важные региональные запросы: ремонт квартир, домов, офисов, магазинов, складов и производственных помещений в Челябинске и области.</p>
           <div class="seo-text compact">
             <p>Егор Платонов — строительная компания в Челябинске, которая выполняет ремонт квартир, домов и коммерческих помещений под ключ. Мы берем на себя работы по штукатурке, шпаклевке, электрике, сантехнике, монтажу гипсокартона, поклейке обоев, остеклению и комплексной отделке.</p>
             <p>Для бизнеса доступны ремонт и отделка офисов, шоурумов, магазинов, кафе, складов и производственных объектов. Для частных клиентов — ремонт квартир в новостройках, ремонт домов, балконов и комплексный ремонт под ключ.</p>
@@ -504,7 +499,7 @@
       <div class="creative-seo card">
         <div>
           <span class="eyebrow">Строительная компания в Челябинске</span>
-          <h2>Не просто текст для SEO, а сильный смысловой блок, который работает и на доверие, и на продвижение</h2>
+          <h2>Почему с нами удобно проходить ремонт от заявки до сдачи объекта</h2>
         </div>
         <div class="creative-seo__grid">
           <p>Если вам нужен подрядчик, который умеет работать по договору, объяснять смету, держать сроки и не теряться в процессе — мы можем быть полезны. Работаем с квартирами, домами, коммерческими помещениями, инженерными системами и комплексными ремонтами.</p>
@@ -566,9 +561,9 @@
         <li>Челябинск и Челябинская область</li>
       </ul>
       <div class="footer-socials">
-        <a aria-label="WhatsApp" href="https://wa.me/79000000000" target="_blank" rel="noopener"><img src="assets/img/icon-camera.svg" alt=""></a>
-        <a aria-label="Telegram" href="https://t.me/username" target="_blank" rel="noopener"><img src="assets/img/icon-video.svg" alt=""></a>
-        <a aria-label="Телефон" href="tel:+79000000000"><img src="assets/img/icon-contract.svg" alt=""></a>
+        <a aria-label="WhatsApp" href="https://wa.me/79000000000" target="_blank" rel="noopener"><img src="assets/img/icon-whatsapp.svg" alt=""></a>
+        <a aria-label="Telegram" href="https://t.me/username" target="_blank" rel="noopener"><img src="assets/img/icon-telegram.svg" alt=""></a>
+        <a aria-label="Телефон" href="tel:+79000000000"><img src="assets/img/icon-phone.svg" alt=""></a>
       </div>
     </div>
   </div>
@@ -579,11 +574,6 @@
     </div>
   </div>
 </footer>
-<div class="sticky-actions">
-  <a href="https://wa.me/79000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/img/icon-camera.svg" alt=""></a>
-  <a href="https://t.me/username" target="_blank" rel="noopener" aria-label="Telegram"><img src="assets/img/icon-video.svg" alt=""></a>
-  <a href="tel:+79000000000" aria-label="Позвонить"><img src="assets/img/icon-contract.svg" alt=""></a>
-</div>
 <div class="modal" id="leadModal" aria-hidden="true">
   <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button class="modal__close" type="button" aria-label="Закрыть">×</button>
@@ -592,6 +582,7 @@
       <h2 id="modalTitle">Получить смету</h2>
       <p>Оставьте контакты — подготовим предварительный расчет, коммерческое предложение или согласуем выезд специалиста.</p>
       <form class="form js-demo-form">
+        <input type="hidden" name="lead_source" value="">
         <div class="form-grid">
           <input type="text" name="name" placeholder="Имя" required>
           <input type="tel" name="phone" placeholder="Телефон" required>

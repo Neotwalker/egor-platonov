@@ -54,14 +54,35 @@
   // Modal
   const modal = document.getElementById('leadModal');
   const modalTitle = document.getElementById('modalTitle');
-  const closeModal = ()=> modal && modal.classList.remove('is-open');
+  const closeModal = ()=> {
+    if(!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+  };
+  const openModal = (trigger)=>{
+    if(!modal) return;
+    const titleText = trigger.getAttribute('data-modal') || 'Оставить заявку';
+    const sourceText = trigger.getAttribute('data-b2b') || trigger.querySelector?.('h3')?.textContent?.trim() || trigger.textContent?.trim() || titleText;
+    if(modalTitle) modalTitle.textContent = titleText;
+    const sourceInput = modal.querySelector('input[name="lead_source"]');
+    if(sourceInput) sourceInput.value = sourceText;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    body.style.overflow='hidden';
+  };
   document.querySelectorAll('[data-modal]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      if(modalTitle) modalTitle.textContent = btn.getAttribute('data-modal') || 'Оставить заявку';
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden','false');
-      body.style.overflow='hidden';
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      openModal(btn);
     });
+    if(btn.getAttribute('role') === 'button'){
+      btn.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          openModal(btn);
+        }
+      });
+    }
   });
   if(modal){
     modal.addEventListener('click', (e)=>{ if(e.target === modal) { closeModal(); body.style.overflow=''; } });
@@ -99,9 +120,12 @@
     let current = 0;
     const updateQuiz = ()=>{
       steps.forEach((step, idx)=>step.classList.toggle('is-active', idx===current));
-      prevBtn.disabled = current===0;
-      nextBtn.hidden = current===steps.length-1;
-      submitBtn.hidden = current!==steps.length-1;
+      if(prevBtn){
+        prevBtn.hidden = current === 0;
+        prevBtn.disabled = current === 0;
+      }
+      if(nextBtn) nextBtn.hidden = current === steps.length - 1;
+      if(submitBtn) submitBtn.hidden = current !== steps.length - 1;
       const pct = ((current+1)/steps.length)*100;
       if(progress) progress.style.setProperty('--progress', pct + '%');
       if(currentStepText) currentStepText.textContent = String(current+1);
@@ -128,6 +152,26 @@
       card.classList.toggle('is-hidden', !show);
     });
   }));
+
+
+  // Reviews slider
+  const reviewSlider = document.querySelector('[data-reviews-slider]');
+  if(reviewSlider){
+    const slides = [...reviewSlider.querySelectorAll('.review-slide')];
+    const prev = document.querySelector('.review-prev');
+    const next = document.querySelector('.review-next');
+    let currentReview = 0;
+    const showReview = (idx)=>{
+      currentReview = (idx + slides.length) % slides.length;
+      slides.forEach((slide, i)=>slide.classList.toggle('is-active', i === currentReview));
+    };
+    prev && prev.addEventListener('click', ()=>showReview(currentReview - 1));
+    next && next.addEventListener('click', ()=>showReview(currentReview + 1));
+    let autoReview = setInterval(()=>showReview(currentReview + 1), 6500);
+    reviewSlider.addEventListener('mouseenter', ()=>clearInterval(autoReview));
+    reviewSlider.addEventListener('mouseleave', ()=>{autoReview = setInterval(()=>showReview(currentReview + 1), 6500);});
+    showReview(0);
+  }
 
   // Comparison slider
   document.querySelectorAll('[data-comparison]').forEach(wrapper=>{
