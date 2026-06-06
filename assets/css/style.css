@@ -906,3 +906,8 @@ img, video, iframe, canvas, svg { max-width: 100%; }
 #services .service-grid, .case-grid, .case-filter { scrollbar-width: thin; scrollbar-color: rgba(255,122,0,.45) rgba(17,24,39,.06); }
 #services .service-grid::-webkit-scrollbar, .case-grid::-webkit-scrollbar, .case-filter::-webkit-scrollbar { height: 6px; }
 #services .service-grid::-webkit-scrollbar-thumb, .case-grid::-webkit-scrollbar-thumb, .case-filter::-webkit-scrollbar-thumb { background: rgba(255,122,0,.45); border-radius:999px; }
+
+/* === v3-8 общие точечные правки === */
+.quiz-prev.is-control-hidden {
+  position: absolute !important;
+}

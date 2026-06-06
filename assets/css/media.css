@@ -333,3 +333,48 @@
   .tilt-card, [data-tilt] { transform: none !important; }
   .btn:hover, .service-card:hover, .case-card:hover, .social-btn:hover { transform:none !important; }
 }
+
+/* === v3-8 точечные адаптивные правки === */
+@media (max-width: 1180px) {
+  .header__row {
+    justify-content: space-between !important;
+  }
+  .header-actions {
+    margin-left: auto !important;
+  }
+  .brand {
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .case-card.card {
+    padding: 0 !important;
+  }
+  .case-card__body {
+    padding: 18px !important;
+  }
+  .case-grid {
+    padding: 0 0 8px !important;
+    margin-inline: 0 !important;
+  }
+  .back-to-top {
+    right: 16px !important;
+    bottom: 92px !important;
+    z-index: 940 !important;
+  }
+  .review-controls,
+  .swiper-review-controls,
+  .reviews-slider-controls,
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .back-to-top {
+    right: 14px !important;
+    bottom: 88px !important;
+  }
+}
