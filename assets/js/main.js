@@ -121,14 +121,15 @@
     const updateQuiz = ()=>{
       steps.forEach((step, idx)=>step.classList.toggle('is-active', idx===current));
       if(prevBtn){
-        prevBtn.hidden = current === 0;
+        prevBtn.classList.toggle('is-control-hidden', current === 0);
         prevBtn.disabled = current === 0;
       }
-      if(nextBtn) nextBtn.hidden = current === steps.length - 1;
-      if(submitBtn) submitBtn.hidden = current !== steps.length - 1;
+      if(nextBtn) nextBtn.classList.toggle('is-control-hidden', current === steps.length - 1);
+      if(submitBtn) submitBtn.classList.toggle('is-control-hidden', current !== steps.length - 1);
       const pct = ((current+1)/steps.length)*100;
       if(progress) progress.style.setProperty('--progress', pct + '%');
       if(currentStepText) currentStepText.textContent = String(current+1);
+      syncConsentButtons();
     };
     nextBtn && nextBtn.addEventListener('click', ()=>{ if(current < steps.length-1){ current++; updateQuiz(); }});
     prevBtn && prevBtn.addEventListener('click', ()=>{ if(current > 0){ current--; updateQuiz(); }});
@@ -154,23 +155,25 @@
   }));
 
 
-  // Reviews slider
+  // Reviews slider by pages
   const reviewSlider = document.querySelector('[data-reviews-slider]');
   if(reviewSlider){
     const slides = [...reviewSlider.querySelectorAll('.review-slide')];
     const prev = document.querySelector('.review-prev');
     const next = document.querySelector('.review-next');
-    let currentReview = 0;
-    const showReview = (idx)=>{
-      currentReview = (idx + slides.length) % slides.length;
-      slides.forEach((slide, i)=>slide.classList.toggle('is-active', i === currentReview));
+    let currentPage = 0;
+    const perPage = () => window.innerWidth <= 860 ? 1 : (window.innerWidth <= 1180 ? 2 : 3);
+    const pages = () => Math.max(1, Math.ceil(slides.length / perPage()));
+    const showPage = (idx)=>{
+      currentPage = (idx + pages()) % pages();
+      const start = currentPage * perPage();
+      const end = start + perPage();
+      slides.forEach((slide, i)=>slide.classList.toggle('is-visible', i >= start && i < end));
     };
-    prev && prev.addEventListener('click', ()=>showReview(currentReview - 1));
-    next && next.addEventListener('click', ()=>showReview(currentReview + 1));
-    let autoReview = setInterval(()=>showReview(currentReview + 1), 6500);
-    reviewSlider.addEventListener('mouseenter', ()=>clearInterval(autoReview));
-    reviewSlider.addEventListener('mouseleave', ()=>{autoReview = setInterval(()=>showReview(currentReview + 1), 6500);});
-    showReview(0);
+    prev && prev.addEventListener('click', ()=>showPage(currentPage - 1));
+    next && next.addEventListener('click', ()=>showPage(currentPage + 1));
+    window.addEventListener('resize', ()=>showPage(Math.min(currentPage, pages()-1)));
+    showPage(0);
   }
 
   // Comparison slider
@@ -228,5 +231,35 @@
     syncQuizButtons();
     document.querySelectorAll('.quiz-prev,.quiz-next').forEach(b => b.addEventListener('click', () => setTimeout(syncQuizButtons, 0)));
   }
+
+
+  // Make service cards fully clickable
+  document.querySelectorAll('.service-card').forEach(card=>{
+    const link = card.querySelector('.service-card__footer a');
+    if(!link) return;
+    card.setAttribute('role','link');
+    card.setAttribute('tabindex','0');
+    card.addEventListener('click', (e)=>{
+      if(e.target.closest('a,button,input,select,textarea,label')) return;
+      window.location.href = link.href;
+    });
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); window.location.href = link.href; }
+    });
+  });
+
+  // Consent checkbox: disable submit until accepted
+  function syncConsentButtons(){
+    document.querySelectorAll('form').forEach(form=>{
+      const consent = form.querySelector('.check--policy input[type="checkbox"]');
+      const submit = form.querySelector('button[type="submit"], .quiz-submit');
+      if(!consent || !submit) return;
+      submit.disabled = !consent.checked;
+    });
+  }
+  document.querySelectorAll('.check--policy input[type="checkbox"]').forEach(ch=>{
+    ch.addEventListener('change', syncConsentButtons);
+  });
+  syncConsentButtons();
 
 })();
