@@ -216,21 +216,6 @@
     });
   });
 
-  // Map
-  const mapNode = document.getElementById('objectMap');
-  if(mapNode && typeof L !== 'undefined'){
-    const map = L.map(mapNode, {scrollWheelZoom:false}).setView([55.1603, 61.4026], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-    const points = [
-      {coords:[55.1644,61.4368], text:'Квартира в новостройке · 92 м²'},
-      {coords:[55.1469,61.3694], text:'Коммерческое помещение · 310 м²'},
-      {coords:[55.2194,61.3215], text:'Производственный объект · 1250 м²'},
-      {coords:[55.1808,61.2730], text:'Загородный дом · 146 м²'}
-    ];
-    points.forEach(p=>L.marker(p.coords).addTo(map).bindPopup(p.text));
-    setTimeout(()=>map.invalidateSize(), 600);
-  }
-
   // Make service cards fully clickable
   document.querySelectorAll('.service-card').forEach(card=>{
     const link = card.querySelector('.service-card__footer a');
