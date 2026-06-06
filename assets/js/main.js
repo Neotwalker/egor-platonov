@@ -212,4 +212,21 @@
     points.forEach(p=>L.marker(p.coords).addTo(map).bindPopup(p.text));
     setTimeout(()=>map.invalidateSize(), 600);
   }
+
+  // v3.2 final UI guards
+  const quizPrevGuard = document.querySelector('.quiz-prev');
+  const quizNextGuard = document.querySelector('.quiz-next');
+  const quizSubmitGuard = document.querySelector('.quiz-submit');
+  const quizStepsGuard = [...document.querySelectorAll('.quiz-step')];
+  const syncQuizButtons = () => {
+    const activeIndex = Math.max(0, quizStepsGuard.findIndex(s => s.classList.contains('is-active')));
+    if(quizPrevGuard){ quizPrevGuard.hidden = activeIndex === 0; quizPrevGuard.disabled = activeIndex === 0; }
+    if(quizNextGuard){ quizNextGuard.hidden = activeIndex === quizStepsGuard.length - 1; }
+    if(quizSubmitGuard){ quizSubmitGuard.hidden = activeIndex !== quizStepsGuard.length - 1; }
+  };
+  if(quizStepsGuard.length){
+    syncQuizButtons();
+    document.querySelectorAll('.quiz-prev,.quiz-next').forEach(b => b.addEventListener('click', () => setTimeout(syncQuizButtons, 0)));
+  }
+
 })();

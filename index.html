@@ -51,7 +51,7 @@
             <span class="mega-title">Нужно быстро сориентироваться?</span>
             <p>Подскажем, какая услуга подойдет именно под ваш объект, и подготовим предварительную смету.</p>
             <button class="btn btn--brand" data-modal="Получить смету">Получить смету</button>
-            <a class="btn btn--ghost" href="services/index.html">Открыть архив услуг</a>
+            <a class="btn btn--ghost" href="services/index.html">В каталог</a>
           </div>
         </div>
       </div>
@@ -309,11 +309,11 @@
                 <input type="tel" name="phone" placeholder="Телефон" required>
               </div>
               <textarea name="comment" rows="4" placeholder="Дополнительно: этаж, состояние объекта, фото, пожелания"></textarea>
-              <label class="check"><input type="checkbox" required> <span>Согласен на обработку персональных данных</span></label>
+              <label class="check check--policy"><input type="checkbox" required><span>Отправляя заявку, Вы принимаете и соглашаетесь с <a href="policy.html">Политикой конфиденциальности</a></span></label>
             </div>
           </div>
           <div class="quiz-controls">
-            <button class="btn btn--ghost quiz-prev" type="button" disabled>Назад</button>
+            <button class="btn btn--ghost quiz-prev" type="button" hidden disabled>Назад</button>
             <div class="quiz-controls__right">
               <button class="btn btn--dark quiz-next" type="button">Далее</button>
               <button class="btn btn--brand quiz-submit" type="submit" hidden>Получить расчет</button>
@@ -401,7 +401,7 @@
           <p>Сделали этапы более креативными: визуальная линия движения помогает быстро понять весь путь клиента.</p>
         </div>
       </div>
-      <div class="timeline timeline--scroll" aria-label="Этапы работы">
+      <div class="stages-grid" aria-label="Этапы работы">
         <article class="timeline-item"><b>01</b><h3>Заявка</h3><p>Вы оставляете заявку или пишете в мессенджер.</p></article>
         <article class="timeline-item"><b>02</b><h3>Консультация</h3><p>Уточняем формат объекта, сроки и задачу.</p></article>
         <article class="timeline-item"><b>03</b><h3>Выезд</h3><p>Осматриваем объект, фиксируем вводные и пожелания.</p></article>
@@ -432,6 +432,7 @@
       <div class="map-buttons reviews-map-buttons">
         <a class="btn btn--ghost" href="https://go.2gis.com/" target="_blank" rel="noopener">Отзывы в 2ГИС</a>
         <a class="btn btn--ghost" href="https://yandex.ru/maps/56/chelyabinsk/" target="_blank" rel="noopener">Отзывы на Яндекс Картах</a>
+        <button class="btn btn--brand" data-modal="Получить все отзывы">Все отзывы</button>
       </div>
     </div>
   </section>
@@ -440,18 +441,16 @@
 
   <section class="section" id="map-seo">
     <div class="container reveal">
-      <div class="map-seo card">
-        <div class="map-seo__map">
-          <div id="objectMap" class="leaflet-map" aria-label="Карта объектов"></div>
+      <div class="map-seo map-seo--office card">
+        <div class="map-seo__map map-seo__map--office">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=61.402554%2C55.159897&z=12&pt=61.402554,55.159897,pm2orgm" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative;min-height:420px;border:0;border-radius:28px;overflow:hidden;" title="Офис строительной компании на карте Челябинска"></iframe>
         </div>
-        <div class="map-seo__content">
-          <span class="eyebrow">Интерактивная карта и локальное SEO</span>
-          <h2>Ремонт и строительство в Челябинске с понятной картой объектов</h2>
-          <p>Карта помогает быстро показать географию работ, а SEO-блок рядом закрывает важные региональные запросы: ремонт квартир, домов, офисов, магазинов, складов и производственных помещений в Челябинске и области.</p>
-          <div class="seo-text compact">
-            <p>Егор Платонов — строительная компания в Челябинске, которая выполняет ремонт квартир, домов и коммерческих помещений под ключ. Мы берем на себя работы по штукатурке, шпаклевке, электрике, сантехнике, монтажу гипсокартона, поклейке обоев, остеклению и комплексной отделке.</p>
-            <p>Для бизнеса доступны ремонт и отделка офисов, шоурумов, магазинов, кафе, складов и производственных объектов. Для частных клиентов — ремонт квартир в новостройках, ремонт домов, балконов и комплексный ремонт под ключ.</p>
-          </div>
+        <div class="map-seo__content map-seo__content--compact">
+          <span class="eyebrow">Офис и зона работ</span>
+          <h2>Работаем по Челябинску и области</h2>
+          <p class="lead">Офис и основной выезд специалистов — Челябинск. Берём квартиры, дома, офисы, магазины, склады и производственные помещения.</p>
+          <div class="map-seo__chips"><span>Квартиры</span><span>Дома</span><span>Коммерция</span><span>Производство</span></div>
+          <div class="map-seo__notice"><strong>Что можно сделать уже сейчас?</strong><p>Отправьте план, фото объекта или адрес — подготовим предварительную оценку и подскажем, нужен ли выезд специалиста.</p></div>
           <button class="btn btn--brand" data-modal="Заказать выезд специалиста">Заказать выезд специалиста</button>
         </div>
       </div>
@@ -526,7 +525,7 @@
             <select name="contact_way"><option>Способ связи</option><option>Телефон</option><option>WhatsApp</option><option>Telegram</option></select>
           </div>
           <textarea rows="4" placeholder="Комментарий"></textarea>
-          <label class="check"><input type="checkbox" required> <span>Согласен на обработку персональных данных</span></label>
+          <label class="check check--policy"><input type="checkbox" required><span>Отправляя заявку, Вы принимаете и соглашаетесь с <a href="policy.html">Политикой конфиденциальности</a></span></label>
           <button class="btn btn--brand" type="submit">Получить расчет</button>
         </form>
       </div>
@@ -598,7 +597,7 @@
           </select>
         </div>
         <textarea name="message" rows="4" placeholder="Комментарий / адрес объекта"></textarea>
-        <label class="check"><input type="checkbox" required> <span>Согласен на обработку персональных данных</span></label>
+        <label class="check check--policy"><input type="checkbox" required><span>Отправляя заявку, Вы принимаете и соглашаетесь с <a href="policy.html">Политикой конфиденциальности</a></span></label>
         <button class="btn btn--brand" type="submit">Отправить заявку</button>
       </form>
     </div>
