@@ -378,3 +378,172 @@
     bottom: 88px !important;
   }
 }
+
+
+/* === v3-9 точечные правки по мобильным скринам === */
+@media (min-width: 861px) and (max-width: 1180px) {
+  .owner-block {
+    grid-template-columns: .86fr 1.14fr !important;
+    align-items: center !important;
+  }
+}
+
+/* owner-points: единый стиль, без широкого исключения */
+.owner-point--wide {
+  grid-column: auto !important;
+  display: block !important;
+  grid-template-columns: none !important;
+  align-items: initial !important;
+  gap: 0 !important;
+  min-height: auto !important;
+}
+.owner-point--wide img {
+  margin-bottom: 18px !important;
+}
+.owner-point--wide h3 {
+  margin: 0 0 8px !important;
+}
+
+.btn--archive span {
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 860px) {
+  /* Горизонтальные свайп-блоки: скрываем скроллбар и даём безопасные края */
+  #services .service-grid,
+  .case-grid,
+  .case-filter,
+  .stages-grid,
+  .archive-quick-links {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  #services .service-grid::-webkit-scrollbar,
+  .case-grid::-webkit-scrollbar,
+  .case-filter::-webkit-scrollbar,
+  .stages-grid::-webkit-scrollbar,
+  .archive-quick-links::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  #services .service-grid,
+  .case-grid {
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-bottom: 14px !important;
+    scroll-padding-left: 14px !important;
+    scroll-padding-right: 14px !important;
+  }
+  .case-filter {
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-bottom: 10px !important;
+    scroll-padding-left: 14px !important;
+  }
+  .stages-grid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Capsule metric cards: компактнее */
+  .capsule-block__cards {
+    gap: 8px !important;
+  }
+  .metric-card {
+    padding: 12px 14px !important;
+    border-radius: 18px !important;
+    min-height: 0 !important;
+  }
+  .metric-card strong {
+    font-size: 1.22rem !important;
+    margin-bottom: 2px !important;
+  }
+  .metric-card span {
+    font-size: .9rem !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Quiz controls всегда в одну строку */
+  .quiz-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+  .quiz-controls__right {
+    display: grid !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+  }
+  .quiz-prev,
+  .quiz-next,
+  .quiz-submit {
+    width: auto !important;
+    min-width: 118px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .map-seo__notice {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Нижняя панель: только иконки */
+  .mobile-bottom-cta {
+    grid-template-columns: repeat(3, 1fr) !important;
+    left: 12px !important;
+    right: 12px !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+  }
+  .mobile-bottom-cta a,
+  .mobile-bottom-cta button {
+    font-size: 0 !important;
+    gap: 0 !important;
+    min-height: 52px !important;
+    padding: 0 !important;
+  }
+  .mobile-bottom-cta img {
+    width: 28px !important;
+    height: 28px !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #services .service-grid,
+  .case-grid {
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    scroll-padding-left: 12px !important;
+  }
+  .case-filter {
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .quiz-prev,
+  .quiz-next,
+  .quiz-submit {
+    min-width: 104px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
