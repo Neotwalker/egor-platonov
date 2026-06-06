@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="canonical" href="https://neotwalker.github.io/egor-platonov/">
   <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
@@ -413,15 +414,20 @@
         <div>
           <span class="eyebrow">Отзывы клиентов</span>
           <h2>Отзывы о ремонте, сроках и коммуникации</h2>
-          <p>Оптимизированный слайдер без тяжелого видео: дата, абстрактная аватарка, тип объекта и короткий отзыв.</p>
+          <p>Слайдер на Swiper: плавное листание мышью, свайпы на телефоне, loop-режим и 3 видимых отзыва на десктопе.</p>
         </div>
-        <div class="review-controls"><button class="review-prev" type="button" aria-label="Предыдущий отзыв">←</button><button class="review-next" type="button" aria-label="Следующий отзыв">→</button></div>
+        <div class="review-controls swiper-review-controls"><button class="review-prev" type="button" aria-label="Предыдущие отзывы">←</button><button class="review-next" type="button" aria-label="Следующие отзывы">→</button></div>
       </div>
-      <div class="reviews-slider" data-reviews-slider>
-        <article class="review-slide card is-active"><div class="review-avatar">А</div><div class="review-slide__body"><div class="review-meta"><strong>Анна</strong><span>14 мая 2026</span></div><p>Смета была прозрачной, а по фотоотчетам было видно, как движется работа. Сдали в срок и без неприятных сюрпризов.</p><em>Ремонт квартиры в новостройке</em></div></article>
-        <article class="review-slide card"><div class="review-avatar">И</div><div class="review-slide__body"><div class="review-meta"><strong>Игорь</strong><span>02 апреля 2026</span></div><p>Подготовили помещение к запуску бизнеса без затяжек. Удобно, что инженерные и отделочные работы закрыли одной командой.</p><em>Коммерческое помещение</em></div></article>
-        <article class="review-slide card"><div class="review-avatar">С</div><div class="review-slide__body"><div class="review-meta"><strong>Сергей</strong><span>18 марта 2026</span></div><p>Понравился человеческий подход: подробно объяснили процесс, помогли с материалами и не потерялись после предоплаты.</p><em>Ремонт частного дома</em></div></article>
-        <article class="review-slide card"><div class="review-avatar">М</div><div class="review-slide__body"><div class="review-meta"><strong>Марина</strong><span>27 февраля 2026</span></div><p>Самое ценное — спокойная коммуникация. Все решения согласовывали заранее, а спорные моменты закрывали без давления.</p><em>Отделка квартиры</em></div></article>
+      <div class="reviews-swiper swiper" data-reviews-swiper>
+        <div class="swiper-wrapper">
+          <article class="review-slide card swiper-slide"><div class="review-avatar">А</div><div class="review-slide__body"><div class="review-meta"><strong>Анна</strong><span>14 мая 2026</span></div><p>Смета была прозрачной, а по фотоотчетам было видно, как движется работа. Сдали в срок и без неприятных сюрпризов.</p><em>Ремонт квартиры в новостройке</em></div></article>
+          <article class="review-slide card swiper-slide"><div class="review-avatar">И</div><div class="review-slide__body"><div class="review-meta"><strong>Игорь</strong><span>02 апреля 2026</span></div><p>Подготовили помещение к запуску бизнеса без затяжек. Удобно, что инженерные и отделочные работы закрыли одной командой.</p><em>Коммерческое помещение</em></div></article>
+          <article class="review-slide card swiper-slide"><div class="review-avatar">С</div><div class="review-slide__body"><div class="review-meta"><strong>Сергей</strong><span>18 марта 2026</span></div><p>Понравился человеческий подход: подробно объяснили процесс, помогли с материалами и не потерялись после предоплаты.</p><em>Ремонт частного дома</em></div></article>
+          <article class="review-slide card swiper-slide"><div class="review-avatar">М</div><div class="review-slide__body"><div class="review-meta"><strong>Марина</strong><span>27 февраля 2026</span></div><p>Самое ценное — спокойная коммуникация. Все решения согласовывали заранее, а спорные моменты закрывали без давления.</p><em>Отделка квартиры</em></div></article>
+          <article class="review-slide card swiper-slide"><div class="review-avatar">Д</div><div class="review-slide__body"><div class="review-meta"><strong>Дмитрий</strong><span>11 февраля 2026</span></div><p>Получили понятное КП и календарный план. На объекте было спокойно: каждый этап заранее объясняли и показывали.</p><em>Ремонт офиса</em></div></article>
+          <article class="review-slide card swiper-slide"><div class="review-avatar">О</div><div class="review-slide__body"><div class="review-meta"><strong>Ольга</strong><span>30 января 2026</span></div><p>Понравилось, что помогли с материалами и не навязывали лишнего. По итогу бюджет остался управляемым.</p><em>Комплексный ремонт</em></div></article>
+        </div>
+        <div class="reviews-pagination swiper-pagination"></div>
       </div>
       <div class="map-buttons reviews-map-buttons">
         <a class="btn btn--ghost" href="https://go.2gis.com/" target="_blank" rel="noopener">Отзывы в 2ГИС</a>
@@ -600,6 +606,7 @@
 </div>
 <div class="toast" id="toast">Спасибо! В статической версии это демо-форма. При интеграции на WordPress сюда подключаются CRM, Telegram/WhatsApp и цели Метрики.</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
 
 </body></html>

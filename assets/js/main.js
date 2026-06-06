@@ -155,51 +155,31 @@
   }));
 
 
-  // Reviews slider: loop, pages and drag/swipe
-  const reviewSlider = document.querySelector('[data-reviews-slider]');
-  if(reviewSlider){
-    const slides = [...reviewSlider.querySelectorAll('.review-slide')];
-    const prev = document.querySelector('.review-prev');
-    const next = document.querySelector('.review-next');
-    let currentIndex = 0;
-    let startX = 0;
-    let isDragging = false;
-    const perPage = () => window.innerWidth <= 860 ? 1 : (window.innerWidth <= 1180 ? 2 : 3);
-    const normalize = (idx) => ((idx % slides.length) + slides.length) % slides.length;
-    const showFrom = (idx, direction = 1) => {
-      if(!slides.length) return;
-      currentIndex = normalize(idx);
-      const count = Math.min(perPage(), slides.length);
-      const visible = new Set(Array.from({length: count}, (_, n) => normalize(currentIndex + n)));
-      reviewSlider.style.transform = `translateX(${direction > 0 ? '6px' : '-6px'})`;
-      reviewSlider.style.opacity = '0.86';
-      requestAnimationFrame(()=>{
-        slides.forEach((slide, i)=>slide.classList.toggle('is-visible', visible.has(i)));
-        requestAnimationFrame(()=>{
-          reviewSlider.style.transform = 'translateX(0)';
-          reviewSlider.style.opacity = '1';
-        });
-      });
-    };
-    const move = (direction) => showFrom(currentIndex + direction * perPage(), direction);
-    prev && prev.addEventListener('click', ()=>move(-1));
-    next && next.addEventListener('click', ()=>move(1));
-    reviewSlider.addEventListener('pointerdown', (e)=>{
-      isDragging = true;
-      startX = e.clientX;
-      reviewSlider.classList.add('is-dragging');
-      reviewSlider.setPointerCapture && reviewSlider.setPointerCapture(e.pointerId);
+  // Reviews slider: Swiper
+  const reviewsSwiperEl = document.querySelector('[data-reviews-swiper]');
+  if (reviewsSwiperEl && typeof Swiper !== 'undefined') {
+    new Swiper(reviewsSwiperEl, {
+      loop: true,
+      speed: 650,
+      grabCursor: true,
+      watchOverflow: true,
+      spaceBetween: 18,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      autoplay: false,
+      navigation: {
+        nextEl: '.review-next',
+        prevEl: '.review-prev'
+      },
+      pagination: {
+        el: '.reviews-pagination',
+        clickable: true
+      },
+      breakpoints: {
+        700: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 18 },
+        1180: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 18 }
+      }
     });
-    reviewSlider.addEventListener('pointerup', (e)=>{
-      if(!isDragging) return;
-      isDragging = false;
-      reviewSlider.classList.remove('is-dragging');
-      const dx = e.clientX - startX;
-      if(Math.abs(dx) > 45) move(dx < 0 ? 1 : -1);
-    });
-    reviewSlider.addEventListener('pointercancel', ()=>{isDragging=false;reviewSlider.classList.remove('is-dragging');});
-    window.addEventListener('resize', ()=>showFrom(currentIndex, 1));
-    showFrom(0, 1);
   }
 
   // Back to top button

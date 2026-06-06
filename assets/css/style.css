@@ -994,3 +994,23 @@ a:hover{color:#9a4b00;text-decoration:none}
 .modal__close{z-index:20002!important}
 @media(max-width:860px){.quiz-next,.quiz-submit{min-width:150px!important}.back-to-top{right:16px;bottom:16px;width:52px;height:52px;border-radius:17px}}
 @media(max-width:560px){.quiz-controls{gap:10px!important}.quiz-next,.quiz-submit{min-width:132px!important}.quiz-prev{min-width:112px!important}.back-to-top{right:14px;bottom:14px}}
+
+
+/* === v3.5 Swiper reviews === */
+.reviews-swiper{width:100%;overflow:hidden;padding:4px 4px 42px!important;cursor:grab;user-select:none}
+.reviews-swiper:active{cursor:grabbing}
+.reviews-swiper .swiper-wrapper{align-items:stretch!important}
+.reviews-swiper .swiper-slide{height:auto!important}
+.reviews-swiper .review-slide{display:grid!important;grid-template-columns:64px 1fr!important;gap:16px!important;align-items:flex-start!important;padding:24px!important;min-height:260px!important;background:linear-gradient(180deg,#fff 0%,#fffaf6 100%)!important;opacity:1!important;transform:none!important;pointer-events:auto!important;border-radius:26px!important;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease!important}
+.reviews-swiper .review-slide:hover{transform:translateY(-4px)!important;box-shadow:0 24px 52px rgba(17,24,39,.12)!important;border-color:rgba(255,122,0,.22)!important}
+.reviews-swiper .review-avatar{width:64px!important;height:64px!important;border-radius:22px!important;display:flex!important;align-items:center!important;justify-content:center!important;background:linear-gradient(135deg,#ff7a00,#ffb36b)!important;color:#fff!important;font-weight:900!important;font-size:1.45rem!important;box-shadow:0 12px 24px rgba(255,122,0,.18)!important}
+.reviews-swiper .review-meta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-bottom:12px!important}
+.reviews-swiper .review-meta strong{font-size:1.08rem!important;color:var(--text)!important}
+.reviews-swiper .review-meta span{font-size:.9rem!important;color:var(--muted)!important}
+.reviews-swiper .review-slide p{font-size:1rem!important;line-height:1.55!important;color:var(--muted)!important;margin:0 0 12px!important}
+.reviews-swiper .review-slide em{font-style:normal!important;font-weight:800!important;color:#9a4b00!important}
+.swiper-review-controls{display:flex!important;gap:10px!important}
+.reviews-pagination{bottom:0!important}
+.reviews-pagination .swiper-pagination-bullet{width:10px;height:10px;background:#ffd6b0;opacity:1}
+.reviews-pagination .swiper-pagination-bullet-active{width:28px;border-radius:999px;background:#ff7a00}
+@media(max-width:860px){.reviews-swiper .review-slide{grid-template-columns:56px 1fr!important;padding:20px!important}.reviews-swiper .review-avatar{width:56px!important;height:56px!important;border-radius:18px!important}.reviews-swiper .review-meta{align-items:flex-start!important;flex-direction:column!important;gap:2px!important}}
