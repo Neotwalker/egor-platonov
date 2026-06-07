@@ -1117,3 +1117,27 @@ img, video, iframe, canvas, svg { max-width: 100%; }
 .modal{
   z-index: 9999 !important;
 }
+
+
+/* === category pages and flexible quiz options === */
+.quiz-options,
+.quiz-modal .quiz-options,
+.quiz-options--2,
+.quiz-modal .quiz-options--2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+}
+.quiz-modal .quiz-options,
+.quiz-modal .quiz-options--2{
+  overflow:visible;
+}
+.service-filters--links a{
+  text-decoration:none;
+}
+.services-category .archive-service-grid{
+  align-items:stretch;
+}
+.services-category .service-card{
+  min-height:310px;
+}

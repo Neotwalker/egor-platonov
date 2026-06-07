@@ -715,3 +715,22 @@
     min-height: 116px;
   }
 }
+
+
+/* === flexible quiz/category adaptive === */
+@media (max-width:860px){
+  .quiz-options,
+  .quiz-modal .quiz-options,
+  .quiz-options--2,
+  .quiz-modal .quiz-options--2{
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)) !important;
+  }
+}
+@media (max-width:560px){
+  .quiz-options,
+  .quiz-modal .quiz-options,
+  .quiz-options--2,
+  .quiz-modal .quiz-options--2{
+    grid-template-columns:1fr !important;
+  }
+}
