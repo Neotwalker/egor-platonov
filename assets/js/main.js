@@ -279,4 +279,55 @@
       }
     });
   });
+// Quiz modal on non-main pages
+  const quizModal = document.getElementById('quizModal');
+  const openQuizButtons = document.querySelectorAll('[data-quiz-modal]');
+  if(quizModal && openQuizButtons.length){
+    const closeQuiz = () => {
+      quizModal.classList.remove('is-open');
+      quizModal.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    };
+    openQuizButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        quizModal.classList.add('is-open');
+        quizModal.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+      });
+    });
+    quizModal.addEventListener('click', (e)=>{ if(e.target === quizModal) closeQuiz(); });
+    const quizClose = quizModal.querySelector('.quiz-modal__close');
+    if(quizClose) quizClose.addEventListener('click', closeQuiz);
+
+    const modalQuiz = quizModal.querySelector('.js-modal-quiz-form');
+    if(modalQuiz){
+      const steps = [...modalQuiz.querySelectorAll('.quiz-step')];
+      const prev = modalQuiz.querySelector('.quiz-prev');
+      const next = modalQuiz.querySelector('.quiz-next');
+      const submit = modalQuiz.querySelector('.quiz-submit');
+      let current = 0;
+      const update = () => {
+        steps.forEach((step, i)=>step.classList.toggle('is-active', i === current));
+        if(prev) prev.classList.toggle('is-control-hidden', current === 0);
+        if(next) next.classList.toggle('is-control-hidden', current === steps.length - 1);
+        if(submit) submit.classList.toggle('is-control-hidden', current !== steps.length - 1);
+      };
+      if(next) next.addEventListener('click', ()=>{ if(current < steps.length - 1){ current++; update(); } });
+      if(prev) prev.addEventListener('click', ()=>{ if(current > 0){ current--; update(); } });
+      modalQuiz.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const toast = document.getElementById('toast');
+        if(toast){
+          toast.textContent = 'Спасибо! Квиз собрал вводные. В боевой версии данные отправляются в CRM и мессенджеры.';
+          toast.classList.add('is-visible');
+          setTimeout(()=>toast.classList.remove('is-visible'), 4200);
+        }
+        modalQuiz.reset();
+        current = 0;
+        update();
+        closeQuiz();
+      });
+      update();
+    }
+  }
 })();

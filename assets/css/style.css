@@ -980,3 +980,24 @@ img, video, iframe, canvas, svg { max-width: 100%; }
 
 .service-final-cta .form .btn[disabled],
 .service-mini-form .btn[disabled]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
+
+/* === v4 unified service/common blocks === */
+.service-hero--unified .service-hero__grid{grid-template-columns:1.05fr .95fr}
+.service-hero--unified .service-hero__image{padding:14px}
+.service-hero--unified .service-hero__image img{height:360px;width:100%;object-fit:cover;border-radius:22px}
+.service-hero--unified .service-hero__actions{align-items:center}
+.service-case-grid--main-style{grid-template-columns:repeat(3,1fr)}
+.service-case-grid--main-style .case-card{cursor:pointer}
+.service-steps-section .timeline--scroll{display:grid;grid-template-columns:repeat(7,1fr)}
+.service-faq .faq-list{max-width:1000px;margin-inline:auto}
+.quiz-modal{z-index:9999}
+.quiz-modal__dialog{width:min(1040px, calc(100% - 28px))}
+.quiz-modal .modal__content{padding:34px}
+.quiz-modal .quiz-options{grid-template-columns:repeat(4,1fr)}
+.quiz-modal .quiz-options--2{grid-template-columns:repeat(3,1fr)}
+.archive-seo{display:none!important}
+.archive-service-card.is-hidden{display:none!important}
+.service-filter{cursor:pointer}
+.services-archive--optimized .archive-hero__stats span{white-space:nowrap}
+.service-main--optimized .service-hero__actions .btn--dark:hover{color:#fff}

@@ -596,3 +596,24 @@
   .service-final-cta .cta,.service-cta{padding:18px}
   .service-final-cta .form-grid{grid-template-columns:1fr}
 }
+
+
+/* === v4 unified service/common blocks adaptive === */
+@media (max-width:1180px){
+  .service-hero--unified .service-hero__grid{grid-template-columns:1fr}
+  .service-case-grid--main-style{grid-template-columns:repeat(2,1fr)}
+  .service-steps-section .timeline--scroll{display:flex}
+}
+@media (max-width:860px){
+  .service-hero--unified .service-hero__image img{height:240px}
+  .service-case-grid--main-style{display:flex;overflow-x:auto;gap:14px;margin-inline:-14px;padding:4px 14px 14px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .service-case-grid--main-style::-webkit-scrollbar{display:none}
+  .service-case-grid--main-style .case-card{min-width:min(84vw,360px);scroll-snap-align:start}
+  .quiz-modal .modal__content{padding:22px}
+  .quiz-modal .quiz-options,.quiz-modal .quiz-options--2{grid-template-columns:1fr}
+  .quiz-modal__dialog{width:min(100% - 18px, 760px)}
+}
+@media (max-width:560px){
+  .service-hero--unified .service-hero__actions{grid-template-columns:1fr}
+  .service-hero--unified .service-hero__image img{height:210px}
+}

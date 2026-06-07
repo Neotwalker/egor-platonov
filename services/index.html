@@ -84,8 +84,8 @@
       <div>
         <nav class="breadcrumbs"><a href="../index.html">Главная</a> / <span>Услуги</span></nav>
         <span class="eyebrow">Каталог услуг</span>
-        <h1>Все строительные и ремонтно-отделочные услуги</h1>
-        <p class="lead">Собрали направления в понятный каталог: жилой ремонт, коммерческие помещения, инженерные работы, штукатурка, балконы, остекление и комплексные решения.</p>
+        <h1>Услуги по ремонту, отделке и строительству</h1>
+        <p class="lead">Выберите нужное направление: ремонт квартир и домов, отделка коммерческих помещений, инженерные работы, штукатурка, балконы, остекление и комплексные решения под ключ.</p>
         <div class="archive-hero__actions">
           <button class="btn btn--brand" data-modal="Получить смету по услуге">Получить смету</button>
           <a class="btn btn--ghost" href="../index.html#quiz">Пройти квиз</a>
@@ -94,13 +94,13 @@
       <div class="archive-hero__panel card">
         <h2>Как выбрать услугу</h2>
         <p>Выберите категорию ниже или оставьте заявку — подскажем, что подойдет под ваш объект, и подготовим предварительный расчет.</p>
-        <div class="archive-hero__stats"><span>22 SEO-страницы</span><span>6 категорий</span><span>цены и этапы</span></div>
+        <div class="archive-hero__stats"><span>22 направления</span><span>6 категорий</span><span>цены и порядок работ</span></div>
       </div>
     </div>
   </section>
   <section class="section archive-popular">
     <div class="container reveal">
-      <div class="section-head"><div><span class="eyebrow">Чаще всего выбирают</span><h2>Популярные услуги</h2><p>Быстрый вход в самые частые направления, чтобы пользователь не терялся в большом каталоге.</p></div></div>
+      <div class="section-head"><div><span class="eyebrow">Чаще всего выбирают</span><h2>Популярные услуги</h2><p>Самые востребованные направления, с которых чаще всего начинают ремонт, отделку или подготовку объекта.</p></div></div>
       <div class="service-grid service-grid--popular"><article class="service-card card tilt-card archive-service-card" data-service-card data-category="Жилой ремонт">
       <div class="service-card__head">
         <img loading="lazy" decoding="async" class="service-card__icon" src="../assets/img/icon-house.svg" alt="Ремонт квартир под ключ">
@@ -172,7 +172,7 @@
   </section>
   <section class="section archive-catalog">
     <div class="container reveal">
-      <div class="section-head"><div><span class="eyebrow">Фильтр по категориям</span><h2>Каталог услуг</h2><p>Карточки ведут на отдельные SEO-страницы с ценами, этапами, кейсами, FAQ и формой заявки.</p></div></div>
+      <div class="section-head"><div><span class="eyebrow">Фильтр по категориям</span><h2>Каталог услуг</h2><p>В каждой услуге есть описание, ориентиры по цене, порядок работы, примеры объектов, ответы на вопросы и форма заявки.</p></div></div>
       <div class="service-filters"><button type="button" class="service-filter is-active" data-service-filter="Все услуги">Все услуги</button><button type="button" class="service-filter" data-service-filter="Жилой ремонт">Жилой ремонт</button><button type="button" class="service-filter" data-service-filter="Коммерческий ремонт">Коммерческий ремонт</button><button type="button" class="service-filter" data-service-filter="Инженерные работы">Инженерные работы</button><button type="button" class="service-filter" data-service-filter="Штукатурка и подготовка">Штукатурка и подготовка</button><button type="button" class="service-filter" data-service-filter="Чистовая отделка">Чистовая отделка</button><button type="button" class="service-filter" data-service-filter="Остекление и балконы">Остекление и балконы</button><button type="button" class="service-filter" data-service-filter="Комплексные решения">Комплексные решения</button></div>
       <div class="service-grid archive-service-grid"><article class="service-card card tilt-card archive-service-card" data-service-card data-category="Штукатурка и подготовка">
       <div class="service-card__head">
@@ -419,17 +419,6 @@
     </article></div>
     </div>
   </section>
-  <section class="section archive-seo">
-    <div class="container reveal">
-      <div class="creative-seo card">
-        <div><span class="eyebrow">SEO и удобство</span><h2>Услуги сгруппированы так, чтобы клиент быстро нашел свой сценарий</h2></div>
-        <div class="creative-seo__grid">
-          <p>Каталог помогает продвигать сайт по конкретным коммерческим запросам: ремонт квартир под ключ, ремонт домов, коммерческая отделка, механизированная штукатурка, электрика, сантехника, остекление и ремонт балконов в Челябинске.</p>
-          <p>Для каждой услуги подготовлена отдельная посадочная страница с оффером, стоимостью, составом работ, этапами, кейсами, FAQ и формой заявки. Это ближе к лендингу услуги, а не к шаблонной SEO-странице.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 
@@ -473,6 +462,61 @@
     </div>
   </div>
 </footer>
+
+<div class="modal quiz-modal" id="quizModal" aria-hidden="true">
+  <div class="modal__dialog quiz-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+    <button class="modal__close quiz-modal__close" type="button" aria-label="Закрыть">×</button>
+    <div class="modal__content">
+      <span class="eyebrow">Квиз</span>
+      <h2 id="quizModalTitle">Рассчитайте предварительную стоимость за 1 минуту</h2>
+      <p>Ответьте на несколько вопросов — так мы быстрее подготовим предварительный расчёт и подскажем следующий шаг.</p>
+      <form class="quiz-form js-modal-quiz-form">
+        <div class="quiz-step is-active" data-step="1">
+          <div class="quiz-options">
+            <label class="option-card"><input type="radio" name="object" value="Квартира" checked><span><img src="../assets/img/icon-house.svg" alt=""><strong>Квартира</strong><em>Новостройка или вторичка</em></span></label>
+            <label class="option-card"><input type="radio" name="object" value="Дом"><span><img src="../assets/img/icon-house.svg" alt=""><strong>Дом</strong><em>Частный или загородный</em></span></label>
+            <label class="option-card"><input type="radio" name="object" value="Коммерция"><span><img src="../assets/img/icon-tower.svg" alt=""><strong>Коммерция</strong><em>Офис, магазин, кафе</em></span></label>
+            <label class="option-card"><input type="radio" name="object" value="Балкон"><span><img src="../assets/img/icon-balcony.svg" alt=""><strong>Балкон</strong><em>Ремонт, остекление, утепление</em></span></label>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="2">
+          <div class="quiz-options quiz-options--2">
+            <label class="option-card"><input type="radio" name="scope" value="Косметический" checked><span><img src="../assets/img/icon-finish.svg" alt=""><strong>Косметический</strong><em>Обновить отделку</em></span></label>
+            <label class="option-card"><input type="radio" name="scope" value="Капитальный"><span><img src="../assets/img/icon-layers.svg" alt=""><strong>Капитальный</strong><em>Инженерия и отделка</em></span></label>
+            <label class="option-card"><input type="radio" name="scope" value="Под ключ"><span><img src="../assets/img/icon-capsule.svg" alt=""><strong>Под ключ</strong><em>От демонтажа до сдачи</em></span></label>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="3">
+          <div class="form-grid">
+            <input type="text" name="area" placeholder="Площадь объекта, м²">
+            <input type="text" name="district" placeholder="Район / адрес объекта">
+            <select name="timeline"><option>Желаемый срок старта</option><option>Как можно скорее</option><option>В течение месяца</option><option>Через 1–3 месяца</option></select>
+            <select name="contact_way"><option>Как удобнее ответить?</option><option>Телефон</option><option>WhatsApp</option><option>Telegram</option></select>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="4">
+          <div class="quiz-result">
+            <h3>Куда отправить расчёт?</h3>
+            <div class="form-grid">
+              <input type="text" name="name" placeholder="Имя" required>
+              <input type="tel" name="phone" placeholder="Телефон" required>
+            </div>
+            <textarea name="comment" rows="4" placeholder="Комментарий"></textarea>
+            <label class="check check--policy"><input type="checkbox" required><span>Отправляя заявку, Вы принимаете и соглашаетесь с <a href="../policy.html">Политикой конфиденциальности</a></span></label>
+          </div>
+        </div>
+        <div class="quiz-controls">
+          <button class="btn btn--ghost quiz-prev is-control-hidden" type="button">Назад</button>
+          <div class="quiz-controls__right">
+            <button class="btn btn--dark quiz-next" type="button">Далее</button>
+            <button class="btn btn--brand quiz-submit is-control-hidden" type="submit">Получить расчет</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="leadModal" aria-hidden="true">
   <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button class="modal__close" type="button" aria-label="Закрыть">×</button>

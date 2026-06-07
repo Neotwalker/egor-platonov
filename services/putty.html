@@ -79,41 +79,26 @@
   </div>
 </header>
 <main class="service-main service-main--optimized">
-  <section class="service-hero section--service-hero">
+  <section class="service-hero section--service-hero service-hero--unified">
     <div class="container service-hero__grid reveal">
       <div class="service-hero__content">
         <nav class="breadcrumbs"><a href="../index.html">Главная</a> / <a href="index.html">Услуги</a> / <span>Шпаклевка стен</span></nav>
         <span class="eyebrow">Штукатурка и подготовка</span>
         <h1>Шпаклевка стен в Челябинске</h1>
-        <p class="lead">Подготовка стен под покраску, обои и декоративную отделку. Считаем смету после осмотра, фиксируем договоренности и показываем ход работ по этапам.</p>
+        <p class="lead">Подготовка стен под покраску, обои и декоративную отделку. Работаем по договору, фиксируем смету, показываем ход работ и даём гарантию до 2 лет.</p>
         <div class="service-hero__actions">
-          <button class="btn btn--brand" data-modal="Рассчитать услугу: Шпаклевка стен">Рассчитать стоимость</button>
-          <a class="btn btn--ghost" href="tel:+79000000000">Позвонить</a>
-          <a class="btn btn--dark" href="https://wa.me/79000000000" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-        <div class="service-hero__facts">
-          <div><strong>от 260 ₽/м²</strong><span>ориентир по цене</span></div>
-          <div><strong>до 24 мес.</strong><span>гарантия по договору</span></div>
-          <div><strong>3–5 дней</strong><span>регулярные фотоотчеты</span></div>
+          <button class="btn btn--brand" data-modal="Получить смету: Шпаклевка стен">Получить смету</button>
+          <button class="btn btn--ghost" data-modal="Получить КП: Шпаклевка стен">Получить КП</button>
+          <button class="btn btn--dark" data-quiz-modal>Рассчитать за 1 минуту</button>
         </div>
       </div>
-      <aside class="service-hero__lead card">
+      <div class="page-hero__image service-hero__image card">
         <img src="../assets/img/case-apartment.webp" alt="Шпаклевка стен" fetchpriority="high" decoding="async">
-        <form class="form service-mini-form js-demo-form">
-          <input type="hidden" name="lead_source" value="hero_service_putty">
-          <h2>Быстрый расчет</h2>
-          <div class="form-grid form-grid--single">
-            <input type="text" name="area" placeholder="Площадь / объект">
-            <input type="tel" name="phone" placeholder="Телефон" required>
-          </div>
-          <label class="check check--policy"><input type="checkbox" required><span>Отправляя заявку, Вы принимаете и соглашаетесь с <a href="../policy.html">Политикой конфиденциальности</a></span></label>
-          <button class="btn btn--brand" type="submit">Получить расчет</button>
-        </form>
-      </aside>
+      </div>
     </div>
   </section>
 
-  <section class="section service-intro">
+<section class="section service-intro">
     <div class="container reveal">
       <div class="service-intro__grid">
         <article class="service-intro__card card">
@@ -145,19 +130,25 @@
     </div>
   </section>
 
-  <section class="section service-cases">
+  <section class="section service-cases" id="cases">
     <div class="container reveal">
       <div class="section-head">
-        <div><span class="eyebrow">Кейсы по услуге</span><h2>Примеры объектов и результата</h2><p>На боевом сайте сюда подставляются реальные кейсы с фото, площадью, сроками, бюджетом и отзывом клиента.</p></div>
+        <div><span class="eyebrow">Кейсы по услуге</span><h2>Примеры объектов и результата</h2><p>Формат блока совпадает с главной: карточки показывают тип объекта, сроки, площадь, выполненные работы и следующий шаг.</p></div>
       </div>
-      <div class="case-grid service-case-grid">
-        <article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Хочу похожий проект: Шпаклевка стен" data-case-type="service"><div class="case-card__image"><img loading="lazy" decoding="async" src="../assets/img/case-apartment.webp" alt="Пример выполненных работ"><span>квартира</span></div><div class="case-card__body"><h3>Пример выполненных работ</h3><div class="case-card__meta"><span>от 45 дней</span><span>до 24 мес.</span><span>договор</span></div><p>Пример результата для страницы услуги: фото, состав работ, сроки реализации и понятный следующий шаг.</p><span class="text-link">Хочу похожий проект</span></div></article>
-        <article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Получить КП по услуге: Шпаклевка стен" data-case-type="service"><div class="case-card__image"><img loading="lazy" decoding="async" src="../assets/img/case-commercial.webp" alt="Жилой объект под ключ"><span>коммерческое помещение</span></div><div class="case-card__body"><h3>Жилой объект под ключ</h3><div class="case-card__meta"><span>по смете</span><span>этапами</span><span>фотоотчет</span></div><p>Подходит для демонстрации опыта компании на похожих объектах и усиления доверия к странице.</p><span class="text-link">Получить КП</span></div></article>
-      </div>
+      <div class="case-grid service-case-grid service-case-grid--main-style"><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Хочу похожий проект: Шпаклевка стен" data-case-type="service">
+          <div class="case-card__image"><img loading="lazy" decoding="async" src="../assets/img/case-apartment.webp" alt="Шпаклевка стен: объект 92 м²"><span>объект</span></div>
+          <div class="case-card__body"><h3>Шпаклевка стен: объект 92 м²</h3><div class="case-card__meta"><span>68 дней</span><span>92 м²</span><span>под ключ</span></div><p>Показали формат результата: состав работ, сроки, фото и понятный следующий шаг для похожего объекта.</p><span class="text-link">Хочу похожий проект</span></div>
+        </article><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Получить КП: Шпаклевка стен" data-case-type="service">
+          <div class="case-card__image"><img loading="lazy" decoding="async" src="../assets/img/case-commercial.webp" alt="Коммерческое помещение 310 м²"><span>сроки</span></div>
+          <div class="case-card__body"><h3>Коммерческое помещение 310 м²</h3><div class="case-card__meta"><span>45 дней</span><span>310 м²</span><span>без простоя</span></div><p>Отделка, инженерные работы и подготовка помещения к запуску с отчетностью по этапам.</p><span class="text-link">Получить КП</span></div>
+        </article><article class="case-card card tilt-card js-case-modal" tabindex="0" role="button" data-modal="Обсудить объект: Шпаклевка стен" data-case-type="service">
+          <div class="case-card__image"><img loading="lazy" decoding="async" src="../assets/img/case-industrial.webp" alt="Производственный объект"><span>контроль</span></div>
+          <div class="case-card__body"><h3>Производственный объект</h3><div class="case-card__meta"><span>этапами</span><span>коммерция</span><span>договор</span></div><p>Работы для склада, производства или распределительного центра с документами и контролем сроков.</p><span class="text-link">Обсудить объект</span></div>
+        </article></div>
     </div>
   </section>
 
-  <section class="section service-comparison">
+<section class="section service-comparison">
     <div class="container reveal">
       <div class="section-head"><div><span class="eyebrow">До / после</span><h2>Результат понятнее, когда его можно сравнить</h2><p>Интерактивный блок показывает формат «было / стало». В будущем сюда ставятся реальные фото по услуге.</p></div></div>
       <div class="comparison card" data-comparison>
@@ -177,14 +168,14 @@
     </div>
   </section>
 
-  <section class="section service-steps-section">
+  <section class="section service-steps-section" id="steps">
     <div class="container reveal">
-      <div class="section-head"><div><span class="eyebrow">Этапы выполнения</span><h2>Как проходит работа по услуге</h2><p>Этапы уникализированы под услугу, чтобы пользователь понимал, что будет происходить после заявки.</p></div></div>
-      <div class="service-steps"><article class="service-step"><b>01</b><span>Осмотр объекта</span></article><article class="service-step"><b>02</b><span>Подбор технологии</span></article><article class="service-step"><b>03</b><span>Смета</span></article><article class="service-step"><b>04</b><span>Договор</span></article><article class="service-step"><b>05</b><span>Выполнение работ</span></article><article class="service-step"><b>06</b><span>Контроль качества</span></article><article class="service-step"><b>07</b><span>Сдача</span></article></div>
+      <div class="section-head"><div><span class="eyebrow">Как проходит работа</span><h2>7 этапов — от первого касания до сдачи объекта</h2><p>Единый блок этапов подтягивается из главной: одинаковая логика, единый шаблон и понятный путь клиента.</p></div></div>
+      <div class="timeline timeline--scroll" aria-label="Этапы работы"><article class="timeline-item"><b>01</b><h3>Заявка</h3><p>Вы оставляете заявку или пишете в мессенджер.</p></article><article class="timeline-item"><b>02</b><h3>Консультация</h3><p>Уточняем формат объекта, сроки и задачу.</p></article><article class="timeline-item"><b>03</b><h3>Выезд</h3><p>Осматриваем объект, фиксируем вводные и пожелания.</p></article><article class="timeline-item"><b>04</b><h3>Смета</h3><p>Считаем стоимость работ, материалов и этапов.</p></article><article class="timeline-item"><b>05</b><h3>Договор</h3><p>Закрепляем объем, цену, график и гарантию.</p></article><article class="timeline-item"><b>06</b><h3>Работы</h3><p>Ведем проект, снабжение и регулярно отчитываемся.</p></article><article class="timeline-item"><b>07</b><h3>Сдача</h3><p>Проверяем качество, закрываем замечания и передаем объект.</p></article></div>
     </div>
   </section>
 
-  <section class="section service-why">
+<section class="section service-why">
     <div class="container reveal">
       <div class="service-why__grid card">
         <div>
@@ -199,14 +190,16 @@
     </div>
   </section>
 
-  <section class="section service-faq">
+  <section class="section service-faq" id="faq">
     <div class="container reveal">
-      <div class="section-head"><div><span class="eyebrow">FAQ по услуге</span><h2>Ответы на частые вопросы</h2><p>Вопросы уникализированы под конкретную услугу и закрывают основные возражения перед заявкой.</p></div></div>
-      <div class="faq-list"><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Сколько стоит шпаклевку стен в Челябинске?</span><i></i></button><div class="faq-answer"><p>Ориентир по стоимости — от 260 ₽/м². Точная сумма зависит от площади, состояния объекта, состава работ и материалов. После осмотра готовим понятную смету.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Можно ли зафиксировать стоимость?</span><i></i></button><div class="faq-answer"><p>Да. После замера и согласования состава работ фиксируем смету и этапы в договоре. Дополнительные работы согласуются отдельно.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Сколько времени занимают работы?</span><i></i></button><div class="faq-answer"><p>Срок зависит от площади и сложности объекта. После осмотра составляем реалистичный график и объясняем, какие этапы влияют на длительность.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Вы помогаете с материалами?</span><i></i></button><div class="faq-answer"><p>Да. Можем подобрать и закупить материалы, оптимизировать снабжение и снизить риск лишних расходов.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Можно ли контролировать объект дистанционно?</span><i></i></button><div class="faq-answer"><p>Да. Отправляем фото- и видеоотчеты, согласуем важные решения и показываем ход работ по этапам.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Какая гарантия на работы?</span><i></i></button><div class="faq-answer"><p>Гарантия до 24 месяцев. Конкретные условия зависят от вида работ и фиксируются в договоре.</p></div></div></div>
+      <div class="section-head">
+        <div><span class="eyebrow">FAQ по ремонту и строительству</span><h2>Частые вопросы перед заявкой</h2><p>Единый шаблон FAQ используется на главной и страницах услуг, чтобы интерфейс был одинаковым везде.</p></div>
+      </div>
+      <div class="faq-list"><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Сколько стоит шпаклевка стен в Челябинске?</span><i></i></button><div class="faq-answer"><p>Ориентир по стоимости — от 260 ₽/м². Точная цена зависит от площади, состояния объекта, состава работ и материалов.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Можно ли зафиксировать стоимость?</span><i></i></button><div class="faq-answer"><p>Да. После замера и согласования состава работ фиксируем смету и этапы в договоре.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Работаете ли вы по договору?</span><i></i></button><div class="faq-answer"><p>Да. В договоре прописываются объем работ, сроки, гарантия, ответственность и порядок оплаты.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Помогаете ли с материалами?</span><i></i></button><div class="faq-answer"><p>Да. Подбираем материалы, помогаем с закупкой и объясняем, где можно сэкономить без потери качества.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Как контролировать проект дистанционно?</span><i></i></button><div class="faq-answer"><p>Отправляем фото- и видеоотчёты, согласовываем важные решения и показываем ход работ по этапам.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Есть ли гарантия?</span><i></i></button><div class="faq-answer"><p>Да. Гарантия до 24 месяцев, условия зависят от вида работ и фиксируются в договоре.</p></div></div></div>
     </div>
   </section>
 
-  <section class="section service-final-cta">
+<section class="section service-final-cta">
     <div class="container reveal">
       <div class="cta card cta--3d service-cta">
         <div class="cta__content">
@@ -344,6 +337,61 @@
     </div>
   </div>
 </footer>
+
+<div class="modal quiz-modal" id="quizModal" aria-hidden="true">
+  <div class="modal__dialog quiz-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+    <button class="modal__close quiz-modal__close" type="button" aria-label="Закрыть">×</button>
+    <div class="modal__content">
+      <span class="eyebrow">Квиз</span>
+      <h2 id="quizModalTitle">Рассчитайте предварительную стоимость за 1 минуту</h2>
+      <p>Ответьте на несколько вопросов — так мы быстрее подготовим предварительный расчёт и подскажем следующий шаг.</p>
+      <form class="quiz-form js-modal-quiz-form">
+        <div class="quiz-step is-active" data-step="1">
+          <div class="quiz-options">
+            <label class="option-card"><input type="radio" name="object" value="Квартира" checked><span><img src="../assets/img/icon-house.svg" alt=""><strong>Квартира</strong><em>Новостройка или вторичка</em></span></label>
+            <label class="option-card"><input type="radio" name="object" value="Дом"><span><img src="../assets/img/icon-house.svg" alt=""><strong>Дом</strong><em>Частный или загородный</em></span></label>
+            <label class="option-card"><input type="radio" name="object" value="Коммерция"><span><img src="../assets/img/icon-tower.svg" alt=""><strong>Коммерция</strong><em>Офис, магазин, кафе</em></span></label>
+            <label class="option-card"><input type="radio" name="object" value="Балкон"><span><img src="../assets/img/icon-balcony.svg" alt=""><strong>Балкон</strong><em>Ремонт, остекление, утепление</em></span></label>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="2">
+          <div class="quiz-options quiz-options--2">
+            <label class="option-card"><input type="radio" name="scope" value="Косметический" checked><span><img src="../assets/img/icon-finish.svg" alt=""><strong>Косметический</strong><em>Обновить отделку</em></span></label>
+            <label class="option-card"><input type="radio" name="scope" value="Капитальный"><span><img src="../assets/img/icon-layers.svg" alt=""><strong>Капитальный</strong><em>Инженерия и отделка</em></span></label>
+            <label class="option-card"><input type="radio" name="scope" value="Под ключ"><span><img src="../assets/img/icon-capsule.svg" alt=""><strong>Под ключ</strong><em>От демонтажа до сдачи</em></span></label>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="3">
+          <div class="form-grid">
+            <input type="text" name="area" placeholder="Площадь объекта, м²">
+            <input type="text" name="district" placeholder="Район / адрес объекта">
+            <select name="timeline"><option>Желаемый срок старта</option><option>Как можно скорее</option><option>В течение месяца</option><option>Через 1–3 месяца</option></select>
+            <select name="contact_way"><option>Как удобнее ответить?</option><option>Телефон</option><option>WhatsApp</option><option>Telegram</option></select>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="4">
+          <div class="quiz-result">
+            <h3>Куда отправить расчёт?</h3>
+            <div class="form-grid">
+              <input type="text" name="name" placeholder="Имя" required>
+              <input type="tel" name="phone" placeholder="Телефон" required>
+            </div>
+            <textarea name="comment" rows="4" placeholder="Комментарий"></textarea>
+            <label class="check check--policy"><input type="checkbox" required><span>Отправляя заявку, Вы принимаете и соглашаетесь с <a href="../policy.html">Политикой конфиденциальности</a></span></label>
+          </div>
+        </div>
+        <div class="quiz-controls">
+          <button class="btn btn--ghost quiz-prev is-control-hidden" type="button">Назад</button>
+          <div class="quiz-controls__right">
+            <button class="btn btn--dark quiz-next" type="button">Далее</button>
+            <button class="btn btn--brand quiz-submit is-control-hidden" type="submit">Получить расчет</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="leadModal" aria-hidden="true">
   <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button class="modal__close" type="button" aria-label="Закрыть">×</button>
