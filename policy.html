@@ -129,10 +129,11 @@
 <div class="modal quiz-modal" id="quizModal" aria-hidden="true">
   <div class="modal__dialog quiz-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
     <button class="modal__close quiz-modal__close" type="button" aria-label="Закрыть">×</button>
-    <div class="modal__content">
+    <div class="modal__content quiz quiz--modal-content">
       <span class="eyebrow">Квиз</span>
       <h2 id="quizModalTitle">Рассчитайте предварительную стоимость за 1 минуту</h2>
       <p>Ответьте на несколько вопросов — так мы быстрее подготовим предварительный расчёт и подскажем следующий шаг.</p>
+      <div class="quiz-progress quiz-progress--modal"><span class="quiz-progress__bar"></span><small>Шаг <b class="quiz-step-current">1</b> из 4</small></div>
       <form class="quiz-form js-modal-quiz-form">
         <div class="quiz-step is-active" data-step="1">
           <div class="quiz-options">

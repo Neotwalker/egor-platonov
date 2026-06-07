@@ -617,3 +617,25 @@
   .service-hero--unified .service-hero__actions{grid-template-columns:1fr}
   .service-hero--unified .service-hero__image img{height:210px}
 }
+
+
+/* === v4 final: unified components adaptive === */
+@media (max-width:1180px){
+  .service-main--optimized #why-us .why-grid{grid-template-columns:repeat(2,1fr);}
+  .service-main--optimized #steps .timeline{display:flex;overflow-x:auto;gap:14px;margin-inline:-14px;padding:4px 14px 14px;scroll-snap-type:x mandatory;scrollbar-width:none;}
+  .service-main--optimized #steps .timeline::-webkit-scrollbar{display:none;}
+  .service-main--optimized #steps .timeline-item{min-width:220px;scroll-snap-align:start;}
+}
+@media (max-width:860px){
+  .quiz-modal .modal__dialog{width:min(100% - 18px, 760px);}
+  .quiz-modal .quiz--modal-content{padding:22px;}
+  .quiz-modal .quiz-options,.quiz-modal .quiz-options--2{grid-template-columns:1fr;}
+  .quiz-modal .form-grid{grid-template-columns:1fr;}
+  .service-main--optimized #why-us .why-grid{display:flex;overflow-x:auto;gap:14px;margin-inline:-14px;padding:4px 14px 14px;scroll-snap-type:x mandatory;scrollbar-width:none;}
+  .service-main--optimized #why-us .why-grid::-webkit-scrollbar{display:none;}
+  .service-main--optimized #why-us .why-grid .card{min-width:min(82vw,340px);scroll-snap-align:start;}
+}
+@media (max-width:560px){
+  .quiz-modal .quiz--modal-content h2{font-size:1.7rem;}
+  .quiz-modal .quiz-progress--modal .quiz-progress__bar{width:160px;}
+}

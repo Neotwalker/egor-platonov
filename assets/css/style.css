@@ -1001,3 +1001,17 @@ img, video, iframe, canvas, svg { max-width: 100%; }
 .service-filter{cursor:pointer}
 .services-archive--optimized .archive-hero__stats span{white-space:nowrap}
 .service-main--optimized .service-hero__actions .btn--dark:hover{color:#fff}
+
+
+/* === v4 final: unified components on service pages === */
+.quiz-modal .modal__dialog{width:min(1160px, calc(100% - 32px));}
+.quiz-modal .quiz--modal-content{padding:34px;background:#fff;border-radius:30px;}
+.quiz-modal .quiz--modal-content h2{margin:0 0 16px;font-size:clamp(1.8rem,3vw,3rem);line-height:1.08;letter-spacing:-.04em;}
+.quiz-modal .quiz--modal-content > p{margin:0 0 22px;color:var(--muted);}
+.quiz-modal .quiz-progress--modal{align-items:flex-start;margin:0 0 22px;}
+.quiz-modal .quiz-progress--modal .quiz-progress__bar{width:220px;}
+.quiz-modal .form-grid{gap:14px;}
+.quiz-modal .quiz-step{min-height:0;}
+.service-main--optimized #why-us .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.service-main--optimized #steps .timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:16px;}
+.service-main--optimized #faq .faq-list{max-width:1000px;margin-inline:auto;}

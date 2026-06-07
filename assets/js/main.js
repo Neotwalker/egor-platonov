@@ -311,6 +311,10 @@
         if(prev) prev.classList.toggle('is-control-hidden', current === 0);
         if(next) next.classList.toggle('is-control-hidden', current === steps.length - 1);
         if(submit) submit.classList.toggle('is-control-hidden', current !== steps.length - 1);
+        const progress = quizModal.querySelector('.quiz-progress__bar');
+        const currentText = quizModal.querySelector('.quiz-step-current');
+        if(progress) progress.style.setProperty('--progress', (((current + 1) / steps.length) * 100) + '%');
+        if(currentText) currentText.textContent = String(current + 1);
       };
       if(next) next.addEventListener('click', ()=>{ if(current < steps.length - 1){ current++; update(); } });
       if(prev) prev.addEventListener('click', ()=>{ if(current > 0){ current--; update(); } });
