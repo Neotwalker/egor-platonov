@@ -286,7 +286,7 @@
   .map-seo__chips { gap: 8px; }
   .map-seo__chips span { font-size: .86rem; padding: 8px 10px; }
 
-  /* SEO block collapses visually */
+  /* Text block collapses visually */
   .creative-seo { padding: 22px !important; }
   .creative-seo__grid { grid-template-columns: 1fr !important; gap: 12px; }
   .creative-seo__grid p:nth-of-type(2) { display:none; }

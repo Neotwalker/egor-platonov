@@ -102,7 +102,7 @@
   document.querySelectorAll('.js-demo-form').forEach(form=>{
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
-      showToast('Спасибо! В статической версии это демо-форма. На интеграции сюда подключаются формы WordPress, отправка в CRM, Telegram/WhatsApp и цели Метрики.');
+      showToast('Спасибо! Мы получили заявку и свяжемся с вами для уточнения деталей.');
       form.reset();
       if(modal && modal.classList.contains('is-open')){ closeModal(); body.style.overflow=''; }
     });
@@ -135,7 +135,7 @@
     prevBtn && prevBtn.addEventListener('click', ()=>{ if(current > 0){ current--; updateQuiz(); }});
     quiz.addEventListener('submit', (e)=>{
       e.preventDefault();
-      showToast('Спасибо! Квиз собрал вводные. В боевой версии данные отправляются в CRM / мессенджеры, а пользователь видит страницу успеха.');
+      showToast('Спасибо! Мы получили ответы и свяжемся с вами для предварительного расчёта.');
       quiz.reset(); current = 0; updateQuiz();
     });
     updateQuiz();
@@ -155,7 +155,7 @@
   }));
 
 
-  // Reviews slider: Swiper
+  // Reviews slider
   const reviewsSwiperEl = document.querySelector('[data-reviews-swiper]');
   if (reviewsSwiperEl && typeof Swiper !== 'undefined') {
     new Swiper(reviewsSwiperEl, {
@@ -322,7 +322,7 @@
         e.preventDefault();
         const toast = document.getElementById('toast');
         if(toast){
-          toast.textContent = 'Спасибо! Квиз собрал вводные. В боевой версии данные отправляются в CRM и мессенджеры.';
+          toast.textContent = 'Спасибо! Мы получили ответы и свяжемся с вами для предварительного расчёта.';
           toast.classList.add('is-visible');
           setTimeout(()=>toast.classList.remove('is-visible'), 4200);
         }
