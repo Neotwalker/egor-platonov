@@ -639,3 +639,79 @@
   .quiz-modal .quiz--modal-content h2{font-size:1.7rem;}
   .quiz-modal .quiz-progress--modal .quiz-progress__bar{width:160px;}
 }
+
+
+/* === final fixes adaptive === */
+@media (max-width: 860px){
+  .quiz-modal .modal__dialog{
+    width: min(calc(100% - 18px), 520px);
+    max-height: calc(100dvh - 18px);
+  }
+  .quiz-modal .modal__content{
+    padding: 22px;
+    max-height: calc(100dvh - 18px);
+  }
+  .quiz-modal .quiz-options,
+  .quiz-modal .quiz-options--2{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .quiz-modal .option-card span{
+    min-height: 122px;
+    padding: 18px;
+  }
+  .quiz-modal .quiz-controls{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .quiz-modal .quiz-controls__right{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+  .quiz-modal .quiz-prev,
+  .quiz-modal .quiz-next,
+  .quiz-modal .quiz-submit{
+    width: auto !important;
+    min-width: 118px;
+    flex: 0 0 auto;
+  }
+  .quiz-modal .quiz-prev.is-control-hidden,
+  .quiz-modal .quiz-next.is-control-hidden,
+  .quiz-modal .quiz-submit.is-control-hidden{
+    position: absolute !important;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mobile-bottom-cta{
+    display: flex;
+  }
+  .back-to-top{
+    right: 14px;
+    bottom: 88px;
+  }
+  body{
+    padding-bottom: 86px;
+  }
+}
+@media (max-width: 560px){
+  .quiz-modal .modal__content{
+    padding: 18px;
+  }
+  .quiz-modal h2{
+    font-size: clamp(1.75rem, 8vw, 2.6rem);
+    line-height: 1.08;
+  }
+  .quiz-modal .option-card span{
+    min-height: 116px;
+  }
+}

@@ -334,4 +334,38 @@
       update();
     }
   }
+// Mobile bottom CTA: show when scrolling down, hide when scrolling up and at the top
+  const mobileBottomCta = document.querySelector('.mobile-bottom-cta');
+  if(mobileBottomCta){
+    let lastScrollY = window.scrollY;
+    const updateMobileCta = () => {
+      const currentY = window.scrollY;
+      const isMobile = window.matchMedia('(max-width: 860px)').matches;
+      if(!isMobile || currentY < 180){
+        mobileBottomCta.classList.remove('is-visible');
+        mobileBottomCta.classList.add('is-hidden-by-scroll');
+        lastScrollY = currentY;
+        return;
+      }
+      if(currentY > lastScrollY){
+        mobileBottomCta.classList.add('is-visible');
+        mobileBottomCta.classList.remove('is-hidden-by-scroll');
+      } else if(currentY < lastScrollY){
+        mobileBottomCta.classList.add('is-hidden-by-scroll');
+      }
+      lastScrollY = currentY;
+    };
+    window.addEventListener('scroll', updateMobileCta, {passive:true});
+    window.addEventListener('resize', updateMobileCta);
+    updateMobileCta();
+  }
+// Fallback for quiz buttons on pages without quiz modal
+  document.querySelectorAll('[data-quiz-modal]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const quizModal = document.getElementById('quizModal');
+      if(quizModal) return;
+      const quizSection = document.getElementById('quiz');
+      if(quizSection) quizSection.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
 })();
