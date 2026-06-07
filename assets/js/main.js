@@ -245,4 +245,38 @@
   });
   syncConsentButtons();
 
+// Services archive category filter
+  document.querySelectorAll('[data-service-filter]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const filter = btn.getAttribute('data-service-filter');
+      document.querySelectorAll('[data-service-filter]').forEach(b=>b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      document.querySelectorAll('[data-service-card]').forEach(card=>{
+        const cat = card.getAttribute('data-category');
+        const show = filter === 'Все услуги' || cat === filter;
+        card.classList.toggle('is-hidden', !show);
+      });
+    });
+  });
+
+  // Clickable case cards open modal
+  document.querySelectorAll('.js-case-modal').forEach(card=>{
+    card.addEventListener('click', (e)=>{
+      if(e.target.closest('a,button,input,select,textarea,label')) return;
+      const modal = document.getElementById('leadModal');
+      const title = document.getElementById('modalTitle');
+      if(title) title.textContent = card.getAttribute('data-modal') || 'Получить расчет';
+      if(modal){
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+      }
+    });
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
 })();

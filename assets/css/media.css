@@ -547,3 +547,52 @@
     padding-right: 12px !important;
   }
 }
+
+
+/* === v4 service pages adaptive optimization === */
+@media (max-width:1180px){
+  .service-hero__grid,.archive-hero__grid,.service-why__grid,.service-comparison .comparison{grid-template-columns:1fr}
+  .service-hero__facts,.service-packages{grid-template-columns:repeat(3,1fr)}
+  .service-steps{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:860px){
+  .service-main--optimized .section,
+  .services-archive--optimized .section{padding:48px 0}
+  .section--service-hero,.archive-hero{padding:30px 0 42px}
+  .service-hero__content h1,.archive-hero h1{font-size:clamp(2.35rem,12vw,4rem)}
+  .service-hero__actions,.archive-hero__actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .service-hero__facts{grid-template-columns:1fr;gap:8px}
+  .service-hero__facts div{padding:14px 16px}
+  .service-hero__lead > img{height:220px}
+  .service-mini-form{padding:14px}
+  .service-intro__grid,.service-packages,.service-case-grid{grid-template-columns:1fr}
+  .service-intro__card,.service-package,.service-why__grid{padding:22px}
+  .service-tags{gap:8px}
+  .service-tags span,.service-why__items span{padding:10px 12px;font-size:.92rem}
+  .service-steps{display:flex;overflow-x:auto;gap:12px;margin-inline:-14px;padding:4px 14px 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .service-steps::-webkit-scrollbar{display:none}
+  .service-step{min-width:220px;scroll-snap-align:start;min-height:112px}
+  .service-comparison .comparison__stage{min-height:300px}
+  .service-comparison__info{grid-template-columns:1fr}
+  .service-pricing-table{padding:18px}
+  .service-pricing-table table{min-width:620px}
+  .service-pricing-table{overflow-x:auto;scrollbar-width:none}
+  .service-pricing-table::-webkit-scrollbar{display:none}
+  .archive-hero__panel{padding:22px}
+  .service-filters{overflow-x:auto;flex-wrap:nowrap;margin-inline:-14px;padding:2px 14px 12px;scrollbar-width:none}
+  .service-filters::-webkit-scrollbar{display:none}
+  .service-filter{white-space:nowrap}
+  .archive-service-grid,.service-grid--popular,.service-grid--related{display:flex;overflow-x:auto;gap:14px;margin-inline:-14px;padding:4px 14px 14px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .archive-service-grid::-webkit-scrollbar,.service-grid--popular::-webkit-scrollbar,.service-grid--related::-webkit-scrollbar{display:none}
+  .archive-service-grid .service-card,.service-grid--popular .service-card,.service-grid--related .service-card{min-width:min(82vw,340px);scroll-snap-align:start}
+  .archive-service-card.is-hidden{display:none!important}
+}
+@media (max-width:560px){
+  .service-hero__content .lead,.archive-hero .lead{font-size:1rem}
+  .service-hero__lead > img{height:190px}
+  .service-intro__card h2,.service-why__grid h2{font-size:1.8rem}
+  .service-package strong{font-size:1.45rem}
+  .service-step{min-width:78vw}
+  .service-final-cta .cta,.service-cta{padding:18px}
+  .service-final-cta .form-grid{grid-template-columns:1fr}
+}
