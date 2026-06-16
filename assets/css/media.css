@@ -1021,3 +1021,36 @@
     font-size:clamp(1.9rem, 4vw, 3rem);
   }
 }
+
+
+/* === v5.4 mobile services archive fix === */
+.archive-service-card.is-catalog-hidden{
+  display:none !important;
+}
+
+@media (max-width:860px){
+  .services-archive--optimized .archive-catalog .reveal{
+    opacity:1 !important;
+    transform:none !important;
+  }
+  .services-archive--optimized .archive-service-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+    width:100% !important;
+    overflow:visible !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  .services-archive--optimized .archive-service-grid .service-card{
+    display:flex !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+  .services-archive--optimized .archive-service-grid .service-card.is-catalog-hidden{
+    display:none !important;
+  }
+}
