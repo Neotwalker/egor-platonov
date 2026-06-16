@@ -368,4 +368,38 @@
       if(quizSection) quizSection.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
+// File upload status and selected-file counter
+  const updateFileUploadState = (input) => {
+    const label = input.closest('.file-upload');
+    if(!label) return;
+    const status = label.querySelector('[data-file-status]');
+    const icon = label.querySelector('.file-upload__icon');
+    const files = Array.from(input.files || []);
+    const count = files.length;
+
+    label.classList.toggle('has-files', count > 0);
+    if(icon) icon.textContent = count > 0 ? String(count) : '+';
+    if(!status) return;
+
+    if(count === 0){
+      status.textContent = 'Файлы не выбраны';
+    } else if(count === 1){
+      status.textContent = `Прикреплён 1 файл: ${files[0].name}`;
+    } else {
+      status.textContent = `Прикреплено файлов: ${count}`;
+    }
+  };
+
+  document.querySelectorAll('.file-upload input[type="file"]').forEach(input => {
+    input.addEventListener('change', () => updateFileUploadState(input));
+    updateFileUploadState(input);
+  });
+
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('reset', () => {
+      window.setTimeout(() => {
+        form.querySelectorAll('.file-upload input[type="file"]').forEach(updateFileUploadState);
+      }, 0);
+    });
+  });
 })();

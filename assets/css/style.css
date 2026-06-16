@@ -1253,3 +1253,39 @@ img, video, iframe, canvas, svg { max-width: 100%; }
 .archive-hero h1{
   overflow-wrap:anywhere;
 }
+
+
+/* === v5 mega menu after removing popular services === */
+.mega-menu{
+  grid-template-columns:minmax(220px, .95fr) minmax(280px, 1.15fr);
+  width:min(680px, 76vw);
+}
+.mega-menu > div{
+  min-width:0;
+}
+
+
+/* === v5.1 file upload state === */
+.file-upload__status{
+  display:block;
+  margin-top:5px;
+  color:#98a2b3;
+  font-size:.82rem;
+  font-weight:650;
+  line-height:1.35;
+  transition:color .2s ease;
+}
+.file-upload.has-files{
+  border-style:solid;
+  border-color:rgba(255,122,0,.58);
+  background:linear-gradient(180deg,#fff9f3 0%,#fff 100%);
+  box-shadow:0 12px 28px rgba(255,122,0,.12);
+}
+.file-upload.has-files .file-upload__status{
+  color:#9a4b00;
+}
+.file-upload.has-files .file-upload__icon{
+  min-width:42px;
+  padding:0 8px;
+  border-radius:14px;
+}
