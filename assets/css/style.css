@@ -1289,3 +1289,82 @@ img, video, iframe, canvas, svg { max-width: 100%; }
   padding:0 8px;
   border-radius:14px;
 }
+
+/* === v5.3 iOS Safari color normalization === */
+html {
+  -webkit-text-size-adjust: 100%;
+  color-scheme: only light;
+}
+
+button,
+input,
+select,
+textarea,
+[role="button"] {
+  color: var(--text);
+  -webkit-text-fill-color: currentColor;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+[type="button"],
+[type="submit"],
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.faq-question,
+.case-filter__btn,
+.service-filter,
+.b2b-list--modal button,
+.b2b-list--modal button span,
+.option-card span,
+.quiz-controls button {
+  color: var(--text);
+  -webkit-text-fill-color: currentColor;
+}
+
+.form select,
+.quiz select {
+  color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+.form input,
+.form textarea,
+.quiz input,
+.quiz textarea {
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+}
+
+.form input::placeholder,
+.form textarea::placeholder,
+.quiz input::placeholder,
+.quiz textarea::placeholder {
+  color: #98a2b3;
+  -webkit-text-fill-color: #98a2b3;
+  opacity: 1;
+}
+
+select option {
+  color: var(--text);
+  background: #fff;
+}
+
+a[href^="tel:"],
+a[href^="mailto:"],
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-decoration: none !important;
+}
+
+.btn--brand,
+.btn--dark,
+.btn--archive,
+.mobile-bottom-cta button,
+.page-numbers.current {
+  -webkit-text-fill-color: currentColor;
+}
