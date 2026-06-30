@@ -1389,3 +1389,161 @@ a[x-apple-data-detectors] {
 .video-card__body h3{margin:0 0 10px;font-size:1.35rem;letter-spacing:-.035em}
 .video-card__body p{margin:0 0 18px;color:var(--muted)}
 .video-card__body .text-link{margin-top:auto}
+
+/* === v5.7 final navigation, branding, catalogue and cross-browser fixes === */
+.brand--image img{
+  width:220px;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  object-position:left center;
+}
+.header__row{min-height:98px}
+.footer .brand--image img{
+  width:210px;
+  height:auto;
+  max-height:none;
+}
+
+/* Dark and accent buttons keep readable text in Safari/iOS and Chromium. */
+.btn--dark,
+.btn--dark:hover,
+.btn--dark:focus-visible,
+.quiz-next,
+.quiz-next:hover,
+.quiz-next:focus-visible,
+.quiz-submit,
+.quiz-submit:hover,
+.quiz-submit:focus-visible{
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  text-shadow:none !important;
+}
+.btn--dark *,
+.quiz-next *,
+.quiz-submit *{
+  color:inherit !important;
+  -webkit-text-fill-color:inherit !important;
+}
+
+/* Mobile navigation contacts */
+.mobile-nav__contacts{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  margin-top:6px;
+  padding-top:14px;
+  border-top:1px solid rgba(17,24,39,.08);
+}
+.mobile-nav__phone{
+  display:flex !important;
+  align-items:center;
+  min-height:52px;
+  padding:0 16px !important;
+  border-radius:16px !important;
+  background:linear-gradient(180deg,#fff8f1 0%,#fff 100%) !important;
+  border:1px solid rgba(255,122,0,.2);
+  color:var(--text) !important;
+  font-weight:850 !important;
+  white-space:nowrap;
+}
+.mobile-nav__socials{
+  display:flex;
+  gap:8px;
+}
+.mobile-nav__socials .social-btn{
+  width:52px;
+  height:52px;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center;
+  border-radius:16px !important;
+  background:#fff !important;
+  border:1px solid rgba(17,24,39,.08);
+  box-shadow:var(--shadow);
+}
+.mobile-nav__socials .social-btn img{width:25px;height:25px}
+
+/* Search field in the service catalogue */
+.archive-service-search{
+  width:min(100%,760px);
+  margin:0 0 20px;
+}
+.archive-service-search input[type="search"]{
+  display:block;
+  width:100%;
+  min-height:58px;
+  padding:0 52px 0 58px;
+  border:1px solid rgba(17,24,39,.12);
+  border-radius:18px;
+  background-color:#fff;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23667085' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:20px center;
+  background-size:24px;
+  color:var(--text);
+  -webkit-text-fill-color:var(--text);
+  font:inherit;
+  font-size:1rem;
+  box-shadow:0 12px 28px rgba(17,24,39,.06);
+  -webkit-appearance:none;
+  appearance:none;
+  transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease;
+}
+.archive-service-search input[type="search"]::placeholder{
+  color:#98a2b3;
+  -webkit-text-fill-color:#98a2b3;
+  opacity:1;
+}
+.archive-service-search input[type="search"]:hover{border-color:rgba(255,122,0,.35)}
+.archive-service-search input[type="search"]:focus{
+  outline:none;
+  border-color:rgba(255,122,0,.62);
+  box-shadow:0 0 0 5px rgba(255,122,0,.11),0 14px 32px rgba(17,24,39,.08);
+}
+.archive-service-search input[type="search"]::-webkit-search-cancel-button{
+  cursor:pointer;
+  opacity:.62;
+}
+.archive-show-more-wrap{display:none !important}
+
+/* Video block and page */
+.video-showcase .section-head,
+.video-page .section-head{align-items:flex-end}
+.video-showcase__all{
+  flex:0 0 auto;
+  min-width:210px;
+  padding-inline:24px;
+  white-space:nowrap;
+  line-height:1.15;
+}
+.video-page .video-showcase__grid{margin-top:8px}
+.video-page-cta{padding-top:0}
+
+/* FAQ page */
+.page-hero--faq .page-hero__inner,
+.page-hero--videos .page-hero__inner{max-width:980px}
+.faq-page-cta{padding-top:0}
+
+/* Backdrop compatibility */
+.site-header,
+.mobile-bottom-cta{
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+}
+
+/* Accessible focus for interactive controls */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid rgba(255,122,0,.38);
+  outline-offset:3px;
+}
+
+@supports not (aspect-ratio:16/9){
+  .video-card__media{height:0;padding-bottom:56.25%}
+  .video-card__media > img{position:absolute;inset:0}
+}

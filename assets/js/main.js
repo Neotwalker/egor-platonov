@@ -432,40 +432,20 @@
     });
   });
 
-  // Laptop-friendly catalogue search and progressive reveal
+  // Catalogue search: all services stay visible until a query is entered.
   const catalogGrid = document.querySelector('.archive-catalog .archive-service-grid');
   const catalogSearch = document.getElementById('serviceCatalogSearch');
-  const showMoreServices = document.getElementById('showMoreServices');
   if(catalogGrid && catalogSearch){
     const cards = [...catalogGrid.querySelectorAll('[data-service-card]')];
-    let expanded = false;
-    const visibleLimit = 12;
-
     const updateCatalog = () => {
-      const query = catalogSearch.value.trim().toLowerCase();
-      let matchedIndex = 0;
+      const query = catalogSearch.value.trim().toLocaleLowerCase('ru-RU');
       cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        const matches = !query || text.includes(query);
-        const withinLimit = expanded || query || matchedIndex < visibleLimit;
-        card.classList.toggle('is-catalog-hidden', !(matches && withinLimit));
-        if(matches) matchedIndex += 1;
+        const text = card.textContent.toLocaleLowerCase('ru-RU');
+        card.classList.toggle('is-catalog-hidden', Boolean(query) && !text.includes(query));
       });
-      if(showMoreServices){
-        const matchingCount = cards.filter(card => !query || card.textContent.toLowerCase().includes(query)).length;
-        showMoreServices.hidden = Boolean(query) || matchingCount <= visibleLimit;
-        showMoreServices.textContent = expanded ? 'Скрыть дополнительные услуги' : 'Показать ещё услуги';
-      }
     };
-
     catalogSearch.addEventListener('input', updateCatalog);
-    if(showMoreServices){
-      showMoreServices.addEventListener('click', () => {
-        expanded = !expanded;
-        updateCatalog();
-        if(!expanded) catalogGrid.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    }
+    catalogSearch.addEventListener('search', updateCatalog);
     updateCatalog();
   }
 
