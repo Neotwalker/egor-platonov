@@ -185,8 +185,14 @@
   // Back to top button
   const backToTop = document.querySelector('.back-to-top');
   if(backToTop){
-    const toggleBackToTop = () => backToTop.classList.toggle('is-visible', window.scrollY > 520);
+    const toggleBackToTop = () => {
+      const isMobile = window.matchMedia('(max-width: 860px)').matches;
+      const threshold = isMobile ? Math.max(900, window.innerHeight * 1.15) : 520;
+      const show = window.scrollY > threshold && !document.body.classList.contains('is-modal-open');
+      backToTop.classList.toggle('is-visible', show);
+    };
     window.addEventListener('scroll', toggleBackToTop, {passive:true});
+    window.addEventListener('resize', toggleBackToTop);
     backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
     toggleBackToTop();
   }
@@ -282,17 +288,21 @@
 // Quiz modal on non-main pages
   const quizModal = document.getElementById('quizModal');
   const openQuizButtons = document.querySelectorAll('[data-quiz-modal]');
+  let resetQuizModal = () => {};
   if(quizModal && openQuizButtons.length){
     const closeQuiz = () => {
       quizModal.classList.remove('is-open');
       quizModal.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
+      document.body.classList.remove('is-modal-open');
     };
     openQuizButtons.forEach(btn=>{
       btn.addEventListener('click', ()=>{
+        resetQuizModal();
         quizModal.classList.add('is-open');
         quizModal.setAttribute('aria-hidden','false');
         document.body.style.overflow='hidden';
+        document.body.classList.add('is-modal-open');
       });
     });
     quizModal.addEventListener('click', (e)=>{ if(e.target === quizModal) closeQuiz(); });
@@ -306,7 +316,7 @@
       const next = modalQuiz.querySelector('.quiz-next');
       const submit = modalQuiz.querySelector('.quiz-submit');
       let current = 0;
-      const update = () => {
+      const update = (scrollToTop = true) => {
         steps.forEach((step, i)=>step.classList.toggle('is-active', i === current));
         if(prev) prev.classList.toggle('is-control-hidden', current === 0);
         if(next) next.classList.toggle('is-control-hidden', current === steps.length - 1);
@@ -315,6 +325,17 @@
         const currentText = quizModal.querySelector('.quiz-step-current');
         if(progress) progress.style.setProperty('--progress', (((current + 1) / steps.length) * 100) + '%');
         if(currentText) currentText.textContent = String(current + 1);
+        if(scrollToTop){
+          const scroller = quizModal.querySelector('.modal__content');
+          if(scroller) requestAnimationFrame(() => { scroller.scrollTop = 0; });
+        }
+      };
+      resetQuizModal = () => {
+        current = 0;
+        modalQuiz.reset();
+        update(false);
+        const scroller = quizModal.querySelector('.modal__content');
+        if(scroller) scroller.scrollTop = 0;
       };
       if(next) next.addEventListener('click', ()=>{ if(current < steps.length - 1){ current++; update(); } });
       if(prev) prev.addEventListener('click', ()=>{ if(current > 0){ current--; update(); } });
@@ -358,6 +379,14 @@
     window.addEventListener('scroll', updateMobileCta, {passive:true});
     window.addEventListener('resize', updateMobileCta);
     updateMobileCta();
+  }
+// Hide fixed mobile actions when the footer is visible
+  const siteFooter = document.querySelector('.site-footer');
+  if(siteFooter && 'IntersectionObserver' in window){
+    const footerObserver = new IntersectionObserver((entries)=>{
+      document.body.classList.toggle('is-footer-in-view', entries[0].isIntersecting);
+    }, {threshold: 0.05});
+    footerObserver.observe(siteFooter);
   }
 // Fallback for quiz buttons on pages without quiz modal
   document.querySelectorAll('[data-quiz-modal]').forEach(btn=>{

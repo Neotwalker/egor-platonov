@@ -1054,3 +1054,192 @@
     display:none !important;
   }
 }
+
+/* === v5.5 mobile bug fixes === */
+@media (max-width: 860px) {
+  /* Catalog controls must use the full viewport width */
+  .services-archive--optimized .archive-service-search {
+    display: block;
+    width: 100%;
+    margin: 0 0 14px;
+  }
+  .services-archive--optimized .archive-service-search input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    padding: 0 16px;
+    border: 1px solid rgba(17,24,39,.12);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--text);
+    box-shadow: 0 8px 22px rgba(17,24,39,.05);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .services-archive--optimized .service-filters {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100%;
+    margin: 0 0 20px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .services-archive--optimized .service-filter {
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    padding: 9px 10px;
+    border-radius: 16px;
+    font-size: .9rem;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  /* Fixed controls should not cover footer content */
+  .mobile-bottom-cta {
+    bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+  .back-to-top {
+    right: 12px;
+    bottom: calc(94px + env(safe-area-inset-bottom));
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+  body.is-footer-in-view .mobile-bottom-cta {
+    transform: translateY(145%) !important;
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+  body.is-footer-in-view .back-to-top {
+    bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+  body.is-modal-open .mobile-bottom-cta,
+  body.is-modal-open .back-to-top {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* Quiz modal: one scroll container, compact cards, visible controls */
+  .modal.quiz-modal {
+    padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom));
+    align-items: center;
+  }
+  .quiz-modal .modal__dialog {
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
+    margin: 0;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .quiz-modal .modal__content,
+  .quiz-modal .quiz--modal-content {
+    flex: 1 1 auto;
+    width: 100%;
+    max-height: none !important;
+    padding: 56px 16px 18px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quiz-modal .modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+  }
+  .quiz-modal .quiz-options,
+  .quiz-modal .quiz-options--2 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .quiz-modal .option-card,
+  .quiz-modal .option-card span {
+    width: 100%;
+    min-width: 0;
+  }
+  .quiz-modal .option-card span {
+    min-height: 0 !important;
+    padding: 15px 16px !important;
+  }
+  .quiz-modal .option-card img {
+    width: 46px;
+    height: 46px;
+  }
+  .quiz-modal .quiz-controls {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 16px;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .quiz-modal .quiz-controls__right {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    justify-self: end;
+    margin-left: 0 !important;
+  }
+  .quiz-modal .quiz-prev,
+  .quiz-modal .quiz-next,
+  .quiz-modal .quiz-submit {
+    position: static !important;
+    min-width: 118px !important;
+    min-height: 50px;
+    width: auto !important;
+  }
+  .quiz-modal .quiz-next,
+  .quiz-modal .quiz-submit,
+  .quiz-modal .btn--dark,
+  .quiz-modal .btn--brand {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .services-archive--optimized .service-filter {
+    font-size: .84rem;
+    padding-inline: 8px;
+  }
+  .quiz-modal .modal__content,
+  .quiz-modal .quiz--modal-content {
+    padding-inline: 14px !important;
+  }
+}
+
+
+/* === v5.6 logo and video responsive === */
+@media (max-width:1180px){
+  .brand--image img{width:218px;max-height:58px}
+}
+@media (max-width:860px){
+  .video-showcase__grid{grid-template-columns:1fr}
+  .video-card__body{padding:20px}
+}
+@media (max-width:560px){
+  .brand--image img{width:178px;max-height:52px}
+  .header__row{min-height:78px}
+  .video-card__play{width:60px;height:60px;font-size:1.05rem}
+  .video-card__badge{left:12px;bottom:12px}
+  .video-card__body h3{font-size:1.18rem}
+}
+@media (max-width:390px){
+  .brand--image img{width:154px;max-height:46px}
+}
