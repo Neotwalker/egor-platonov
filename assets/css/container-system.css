@@ -1,0 +1,67 @@
+/* v5.8 — one container system for every page and section */
+:root{
+  --container:1240px;
+  --container-gutter:20px;
+}
+
+.container{
+  width:min(calc(100% - (var(--container-gutter) * 2)), var(--container)) !important;
+  max-width:none !important;
+  margin-inline:auto !important;
+}
+
+/* Elements that already carry .container must never be narrowed independently. */
+.container.page-hero__inner,
+.page-hero--faq .page-hero__inner,
+.page-hero--videos .page-hero__inner,
+.container.header__row,
+.container.footer__grid,
+.container.footer-bottom__row,
+.container.hero__grid,
+.container.service-hero__grid,
+.container.archive-hero__grid,
+.container.owner-block,
+.container.capsule-block{
+  max-width:none !important;
+}
+
+/* Catalogue controls occupy the same usable width as the catalogue grid. */
+.archive-service-search{
+  width:100% !important;
+  max-width:none !important;
+}
+
+/* The selected horizontal logo is used consistently in header and footer. */
+.brand--image img{
+  width:220px !important;
+  height:auto !important;
+  max-width:100% !important;
+  max-height:70px !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+}
+.footer .brand--image img{
+  width:220px !important;
+}
+
+@media (max-width:1180px){
+  :root{--container-gutter:18px}
+  .brand--image img{width:190px !important;max-height:60px !important}
+  .footer .brand--image img{width:200px !important}
+}
+
+@media (max-width:860px){
+  :root{--container-gutter:14px}
+  .brand--image img{width:168px !important;max-height:54px !important}
+  .footer .brand--image img{width:190px !important}
+}
+
+@media (max-width:560px){
+  :root{--container-gutter:12px}
+  .brand--image img{width:148px !important;max-height:48px !important}
+  .footer .brand--image img{width:176px !important}
+}
+
+@media (max-width:390px){
+  .brand--image img{width:138px !important;max-height:44px !important}
+}

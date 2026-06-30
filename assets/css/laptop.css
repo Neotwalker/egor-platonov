@@ -422,7 +422,7 @@
 
 @media (min-width: 1024px) and (max-width: 1199px) {
   .container {
-    width: min(calc(100% - 48px), 1120px);
+    width: min(calc(100% - 48px), var(--container));
   }
 
   .section,
@@ -528,7 +528,7 @@
 
 @media (min-width: 861px) and (max-width: 1023px) {
   .container {
-    width: min(calc(100% - 36px), 960px);
+    width: min(calc(100% - 36px), var(--container));
   }
 
   .section,

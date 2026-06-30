@@ -242,7 +242,7 @@ textarea{resize:vertical;min-height:118px}
 
 .page-hero{padding:58px 0 34px;background:linear-gradient(180deg,#fff 0%,#fff8f1 100%)}
 .page-hero__grid{display:grid;grid-template-columns:1fr .95fr;gap:28px;align-items:center}
-.page-hero__inner{max-width:920px}
+.page-hero__inner{max-width:none}
 .page-hero--archive .archive-quick-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
 .breadcrumbs{margin-bottom:18px;color:var(--muted);font-weight:600}
 .breadcrumbs a{color:inherit}
@@ -1467,7 +1467,7 @@ a[x-apple-data-detectors] {
 
 /* Search field in the service catalogue */
 .archive-service-search{
-  width:min(100%,760px);
+  width:100%;
   margin:0 0 20px;
 }
 .archive-service-search input[type="search"]{
@@ -1523,7 +1523,7 @@ a[x-apple-data-detectors] {
 
 /* FAQ page */
 .page-hero--faq .page-hero__inner,
-.page-hero--videos .page-hero__inner{max-width:980px}
+.page-hero--videos .page-hero__inner{max-width:none}
 .faq-page-cta{padding-top:0}
 
 /* Backdrop compatibility */

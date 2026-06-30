@@ -142,7 +142,7 @@
 
 /* === v3.7 responsive optimization === */
 @media (max-width: 1180px) {
-  :root { --container: 980px; }
+  :root { --container:1240px; }
   .hero__grid,
   .owner-block,
   .capsule-block,
@@ -845,7 +845,7 @@
 /* === v5 laptop optimization === */
 @media (min-width: 861px) and (max-width: 1440px){
   :root{
-    --container: 1120px;
+    --container:1240px;
     --radius: 22px;
     --radius-sm: 16px;
   }
@@ -998,7 +998,7 @@
 
 @media (min-width: 861px) and (max-width: 1180px){
   :root{
-    --container: 1000px;
+    --container:1240px;
   }
   .container{
     width:min(calc(100% - 36px), var(--container));
