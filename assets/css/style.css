@@ -1627,3 +1627,106 @@ textarea:focus-visible{
 .archive-service-search input[type="search"]:focus{border-color:rgba(255,122,0,.55);box-shadow:0 0 0 4px rgba(255,122,0,.12),0 18px 42px rgba(17,24,39,.08);outline:0}
 .archive-show-more-wrap{display:none !important}
 .archive-service-card.is-catalog-hidden{display:none !important}
+
+/* === v6: contextual lead actions + WP-ready modal form === */
+.hero__actions,
+.service-hero__actions,
+.archive-hero__actions,
+.lead-actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px;
+  margin-top:28px;
+}
+.hero__actions .btn,
+.service-hero__actions .btn,
+.archive-hero__actions .btn,
+.lead-actions .btn{
+  min-width:176px;
+  justify-content:center;
+  white-space:nowrap;
+}
+.lead-modal .modal__content > p{
+  margin:10px 0 22px;
+  max-width:720px;
+}
+.lead-form{
+  display:grid;
+  gap:14px;
+}
+.lead-form .form-grid{
+  margin:0;
+}
+.lead-form textarea{
+  min-height:132px;
+  resize:vertical;
+}
+.lead-form .check--policy{
+  margin-top:2px;
+}
+.lead-form .btn[type="submit"]{
+  width:fit-content;
+  min-width:220px;
+}
+[data-lead-action="call"]{
+  text-decoration:none;
+}
+[data-modal][data-lead-action="discuss"]{
+  cursor:pointer;
+}
+.section + .section,
+.service-main > .section + .section,
+.services-archive > .section + .section,
+.services-category > .section + .section{
+  margin-top:0;
+}
+.section-head{
+  gap:24px;
+  margin-bottom:32px;
+}
+.section-head p{
+  margin-top:12px;
+}
+.card > :first-child{margin-top:0}
+.card > :last-child{margin-bottom:0}
+.cta.card{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) auto;
+  align-items:center;
+  gap:28px;
+}
+.cta.card .hero__actions{
+  margin-top:0;
+}
+@media (max-width: 860px){
+  .hero__actions,
+  .service-hero__actions,
+  .archive-hero__actions,
+  .lead-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:22px;
+  }
+  .hero__actions .btn,
+  .service-hero__actions .btn,
+  .archive-hero__actions .btn,
+  .lead-actions .btn{
+    width:100%;
+    min-width:0;
+  }
+  .cta.card{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .cta.card .hero__actions{
+    margin-top:0;
+  }
+  .lead-form .btn[type="submit"]{
+    width:100%;
+  }
+  .section-head{
+    margin-bottom:22px;
+  }
+}

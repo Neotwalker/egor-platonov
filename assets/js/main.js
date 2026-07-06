@@ -51,25 +51,71 @@
     });
   }
 
-  // Modal
+  // Contextual lead modal prepared for future WordPress + Contact Form 7 integration
   const modal = document.getElementById('leadModal');
   const modalTitle = document.getElementById('modalTitle');
-  const closeModal = ()=> {
+  const modalDesc = document.getElementById('modalDesc');
+  const modalEyebrow = document.getElementById('modalEyebrow');
+  const modalSubmit = document.getElementById('modalSubmit');
+  let lastFocusedElement = null;
+
+  const setFieldValue = (form, name, value) => {
+    const field = form ? form.querySelector(`[name="${name}"]`) : null;
+    if(field) field.value = value || '';
+  };
+
+  const closeModal = () => {
     if(!modal) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden','true');
+    body.style.overflow='';
+    body.classList.remove('is-modal-open');
+    if(lastFocusedElement && typeof lastFocusedElement.focus === 'function'){
+      lastFocusedElement.focus({preventScroll:true});
+    }
   };
-  const openModal = (trigger)=>{
+
+  const openModal = (trigger) => {
     if(!modal) return;
-    const titleText = trigger.getAttribute('data-modal') || 'Оставить заявку';
-    const sourceText = trigger.getAttribute('data-b2b') || trigger.querySelector?.('h3')?.textContent?.trim() || trigger.textContent?.trim() || titleText;
+    lastFocusedElement = trigger;
+    const action = trigger.getAttribute('data-lead-action') || 'estimate';
+    const fallbackTitle = action === 'discuss' ? 'Обсудить объект и задачу' : 'Получить предварительную смету';
+    const fallbackDesc = action === 'discuss'
+      ? 'Расскажите, что нужно сделать. Подскажем этапы, материалы, ориентиры по стоимости и следующий шаг.'
+      : 'Уточним площадь, состояние объекта и состав работ — подготовим ориентир по стоимости.';
+    const titleText = trigger.getAttribute('data-lead-title') || trigger.getAttribute('data-modal') || fallbackTitle;
+    const descText = trigger.getAttribute('data-lead-desc') || fallbackDesc;
+    const submitText = trigger.getAttribute('data-lead-submit') || (action === 'discuss' ? 'Обсудить объект' : 'Получить смету');
+    const sourceText = trigger.getAttribute('data-lead-source')
+      || trigger.getAttribute('data-b2b')
+      || trigger.querySelector?.('h3')?.textContent?.trim()
+      || trigger.textContent?.trim()
+      || titleText;
+    const serviceText = trigger.getAttribute('data-lead-service') || trigger.getAttribute('data-b2b') || '';
+    const pageTitle = document.body.getAttribute('data-page-title') || document.title;
+    const form = modal.querySelector('form');
+
     if(modalTitle) modalTitle.textContent = titleText;
-    const sourceInput = modal.querySelector('input[name="lead_source"]');
-    if(sourceInput) sourceInput.value = sourceText;
+    if(modalDesc) modalDesc.textContent = descText;
+    if(modalEyebrow) modalEyebrow.textContent = action === 'discuss' ? 'Консультация' : 'Заявка на смету';
+    if(modalSubmit) modalSubmit.textContent = submitText;
+
+    setFieldValue(form, 'lead_action', action);
+    setFieldValue(form, 'lead_source', sourceText);
+    setFieldValue(form, 'lead_service', serviceText);
+    setFieldValue(form, 'lead_page_title', pageTitle);
+    setFieldValue(form, 'lead_page_url', window.location.href);
+    setFieldValue(form, 'lead_button_text', trigger.textContent?.trim() || titleText);
+
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden','false');
     body.style.overflow='hidden';
+    body.classList.add('is-modal-open');
+    const firstInput = modal.querySelector('input:not([type="hidden"]), select, textarea, button');
+    if(firstInput) setTimeout(()=>firstInput.focus({preventScroll:true}), 50);
+    syncConsentButtons();
   };
+
   document.querySelectorAll('[data-modal]').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
       e.preventDefault();
@@ -85,10 +131,12 @@
     }
   });
   if(modal){
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) { closeModal(); body.style.overflow=''; } });
-    modal.querySelector('.modal__close').addEventListener('click', ()=>{ closeModal(); body.style.overflow=''; });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeModal(); body.style.overflow=''; } });
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    const closeButton = modal.querySelector('.modal__close');
+    if(closeButton) closeButton.addEventListener('click', closeModal);
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
   }
+
 
   // Toast & demo forms
   const toast = document.getElementById('toast');
@@ -265,96 +313,19 @@
     });
   });
 
-  // Clickable case cards open modal
+    // Clickable case cards open contextual lead modal
   document.querySelectorAll('.js-case-modal').forEach(card=>{
     card.addEventListener('click', (e)=>{
       if(e.target.closest('a,button,input,select,textarea,label')) return;
-      const modal = document.getElementById('leadModal');
-      const title = document.getElementById('modalTitle');
-      if(title) title.textContent = card.getAttribute('data-modal') || 'Получить расчет';
-      if(modal){
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden','false');
-        document.body.style.overflow='hidden';
-      }
+      openModal(card);
     });
     card.addEventListener('keydown', (e)=>{
       if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
-        card.click();
+        openModal(card);
       }
     });
   });
-// Quiz modal on non-main pages
-  const quizModal = document.getElementById('quizModal');
-  const openQuizButtons = document.querySelectorAll('[data-quiz-modal]');
-  let resetQuizModal = () => {};
-  if(quizModal && openQuizButtons.length){
-    const closeQuiz = () => {
-      quizModal.classList.remove('is-open');
-      quizModal.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-      document.body.classList.remove('is-modal-open');
-    };
-    openQuizButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        resetQuizModal();
-        quizModal.classList.add('is-open');
-        quizModal.setAttribute('aria-hidden','false');
-        document.body.style.overflow='hidden';
-        document.body.classList.add('is-modal-open');
-      });
-    });
-    quizModal.addEventListener('click', (e)=>{ if(e.target === quizModal) closeQuiz(); });
-    const quizClose = quizModal.querySelector('.quiz-modal__close');
-    if(quizClose) quizClose.addEventListener('click', closeQuiz);
-
-    const modalQuiz = quizModal.querySelector('.js-modal-quiz-form');
-    if(modalQuiz){
-      const steps = [...modalQuiz.querySelectorAll('.quiz-step')];
-      const prev = modalQuiz.querySelector('.quiz-prev');
-      const next = modalQuiz.querySelector('.quiz-next');
-      const submit = modalQuiz.querySelector('.quiz-submit');
-      let current = 0;
-      const update = (scrollToTop = true) => {
-        steps.forEach((step, i)=>step.classList.toggle('is-active', i === current));
-        if(prev) prev.classList.toggle('is-control-hidden', current === 0);
-        if(next) next.classList.toggle('is-control-hidden', current === steps.length - 1);
-        if(submit) submit.classList.toggle('is-control-hidden', current !== steps.length - 1);
-        const progress = quizModal.querySelector('.quiz-progress__bar');
-        const currentText = quizModal.querySelector('.quiz-step-current');
-        if(progress) progress.style.setProperty('--progress', (((current + 1) / steps.length) * 100) + '%');
-        if(currentText) currentText.textContent = String(current + 1);
-        if(scrollToTop){
-          const scroller = quizModal.querySelector('.modal__content');
-          if(scroller) requestAnimationFrame(() => { scroller.scrollTop = 0; });
-        }
-      };
-      resetQuizModal = () => {
-        current = 0;
-        modalQuiz.reset();
-        update(false);
-        const scroller = quizModal.querySelector('.modal__content');
-        if(scroller) scroller.scrollTop = 0;
-      };
-      if(next) next.addEventListener('click', ()=>{ if(current < steps.length - 1){ current++; update(); } });
-      if(prev) prev.addEventListener('click', ()=>{ if(current > 0){ current--; update(); } });
-      modalQuiz.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const toast = document.getElementById('toast');
-        if(toast){
-          toast.textContent = 'Спасибо! Мы получили ответы и свяжемся с вами для предварительного расчёта.';
-          toast.classList.add('is-visible');
-          setTimeout(()=>toast.classList.remove('is-visible'), 4200);
-        }
-        modalQuiz.reset();
-        current = 0;
-        update();
-        closeQuiz();
-      });
-      update();
-    }
-  }
 // Mobile bottom CTA: show when scrolling down, hide when scrolling up and at the top
   const mobileBottomCta = document.querySelector('.mobile-bottom-cta');
   if(mobileBottomCta){
@@ -388,15 +359,6 @@
     }, {threshold: 0.05});
     footerObserver.observe(siteFooter);
   }
-// Fallback for quiz buttons on pages without quiz modal
-  document.querySelectorAll('[data-quiz-modal]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const quizModal = document.getElementById('quizModal');
-      if(quizModal) return;
-      const quizSection = document.getElementById('quiz');
-      if(quizSection) quizSection.scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  });
 // File upload status and selected-file counter
   const updateFileUploadState = (input) => {
     const label = input.closest('.file-upload');
