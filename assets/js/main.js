@@ -449,4 +449,23 @@
     updateCatalog();
   }
 
+
+  // Fancybox video gallery initialization
+  if (window.Fancybox) {
+    Fancybox.bind('[data-fancybox="site-videos"]', {
+      animated: true,
+      dragToClose: true,
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ['close'],
+        },
+      },
+      iframe: {
+        preload: false,
+      },
+    });
+  }
+
 })();

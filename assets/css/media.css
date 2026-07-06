@@ -1285,3 +1285,30 @@
   .footer .brand--image img{width:198px;height:auto;max-height:none}
   .header__row{min-height:90px}
 }
+
+
+/* === v5.9 responsive fixes === */
+@media (max-width:1180px){
+  .brand--image img{width:190px;max-height:68px}
+  .header__row{min-height:92px}
+  .video-showcase .section-head{align-items:flex-start}
+  .cta > .hero__actions{justify-self:stretch;justify-content:flex-start}
+}
+@media (max-width:860px){
+  .brand--image img{width:168px;max-height:58px}
+  .footer .brand--image img{width:178px;max-height:62px}
+  .video-showcase__grid{grid-template-columns:1fr !important;gap:16px}
+  .video-card.card{padding:0 !important;border-radius:24px}
+  .video-card__body{padding:20px}
+  .video-card__play{width:58px;height:58px;font-size:1rem}
+  .video-card__badge{left:12px;bottom:12px;max-width:calc(100% - 24px);white-space:normal}
+  .video-showcase__all{width:100%;min-width:0;white-space:normal;text-align:center}
+  .cta{grid-template-columns:1fr !important;gap:20px !important}
+  .cta > .hero__actions{justify-self:stretch;display:grid !important;grid-template-columns:1fr;gap:10px;align-items:stretch}
+  .cta > .hero__actions .btn{width:100%;min-width:0;min-height:54px}
+  .archive-service-search input[type="search"]{min-height:56px;border-radius:18px;padding-left:54px;background-position:18px center;font-size:16px}
+}
+@media (max-width:420px){
+  .brand--image img{width:152px;max-height:54px}
+  .video-card__body{padding:18px}
+}
