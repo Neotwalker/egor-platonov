@@ -1,0 +1,115 @@
+
+/* ==========================================================================
+   v6.5 — final carousel geometry and equal-height case cards
+   Loaded after all previous styles.
+   ========================================================================== */
+
+/* Case cards keep one visual rhythm in grid and horizontal mobile layout. */
+#cases .case-grid{
+  align-items:stretch !important;
+}
+#cases .case-card{
+  display:flex !important;
+  flex-direction:column !important;
+  height:auto !important;
+  align-self:stretch !important;
+  box-sizing:border-box !important;
+}
+#cases .case-card__body{
+  display:flex !important;
+  flex:1 1 auto !important;
+  flex-direction:column !important;
+  box-sizing:border-box !important;
+}
+#cases .case-card__body .text-link{
+  margin-top:auto !important;
+  padding-top:18px !important;
+}
+
+/* Video slider: never expose a cropped neighbouring card at a settled position. */
+@media (max-width:1180px){
+  .video-slider{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  .video-slider__viewport{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:0 1px !important;
+    overflow:hidden !important;
+    box-sizing:border-box !important;
+  }
+  .video-showcase__track{
+    display:flex !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    gap:18px !important;
+    margin:0 !important;
+    padding:4px 0 18px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    scroll-padding-inline:0 !important;
+    overscroll-behavior-x:contain !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none !important;
+    box-sizing:border-box !important;
+  }
+  .video-showcase__track::-webkit-scrollbar{
+    display:none !important;
+    width:0 !important;
+    height:0 !important;
+  }
+  .video-showcase__track .video-card{
+    flex:0 0 calc((100% - 18px) / 2) !important;
+    width:calc((100% - 18px) / 2) !important;
+    max-width:calc((100% - 18px) / 2) !important;
+    min-width:0 !important;
+    scroll-snap-align:start !important;
+    scroll-snap-stop:always !important;
+    box-sizing:border-box !important;
+  }
+}
+
+/* One complete video card per viewport on phones. */
+@media (max-width:767px){
+  .video-showcase__track{
+    gap:0 !important;
+  }
+  .video-showcase__track .video-card{
+    flex-basis:100% !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+}
+
+/* Reviews: clip the Swiper itself, not the page container. */
+@media (max-width:1180px){
+  .reviews-swiper{
+    position:relative !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+    padding:4px 1px 38px !important;
+    overflow:hidden !important;
+    box-sizing:border-box !important;
+    contain:paint;
+  }
+  .reviews-swiper .swiper-wrapper{
+    align-items:stretch !important;
+    box-sizing:border-box !important;
+  }
+  .reviews-swiper .swiper-slide{
+    height:auto !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  .reviews-swiper .review-slide{
+    height:100% !important;
+    max-width:100% !important;
+  }
+}

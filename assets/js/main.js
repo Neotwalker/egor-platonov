@@ -263,12 +263,29 @@
     updateQuiz();
   }
 
-  // Cases filter
+  // Cases filter + equal-height cards
   document.querySelectorAll('#cases').forEach(section=>{
     const filterBar = section.querySelector('.case-filter');
     const buttons = [...section.querySelectorAll('.case-filter__btn')];
     const cards = [...section.querySelectorAll('.case-card[data-case-type]')];
     if(!filterBar || !buttons.length || !cards.length) return;
+
+    let equalizeFrame = 0;
+    const equalizeCaseCards = () => {
+      window.cancelAnimationFrame(equalizeFrame);
+      equalizeFrame = window.requestAnimationFrame(()=>{
+        const visibleCards = cards.filter(card=>!card.hidden && !card.classList.contains('is-hidden'));
+        cards.forEach(card=>card.style.minHeight = '');
+        if(visibleCards.length < 2) return;
+
+        const maxHeight = Math.ceil(
+          Math.max(...visibleCards.map(card=>card.getBoundingClientRect().height))
+        );
+        visibleCards.forEach(card=>{
+          card.style.minHeight = `${maxHeight}px`;
+        });
+      });
+    };
 
     const applyCaseFilter = (filter) => {
       buttons.forEach(button=>{
@@ -287,8 +304,9 @@
 
       const grid = section.querySelector('.case-grid');
       if(grid && grid.scrollLeft){
-        grid.scrollTo({left:0, behavior:'smooth'});
+        grid.scrollTo({left:0, behavior:'auto'});
       }
+      equalizeCaseCards();
     };
 
     filterBar.addEventListener('click', event=>{
@@ -297,6 +315,14 @@
       event.preventDefault();
       applyCaseFilter(button.dataset.filter || 'all');
     });
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', ()=>{
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(equalizeCaseCards, 100);
+    }, {passive:true});
+    window.addEventListener('load', equalizeCaseCards, {once:true});
+    document.fonts?.ready?.then(equalizeCaseCards);
 
     applyCaseFilter(
       buttons.find(button=>button.classList.contains('is-active'))?.dataset.filter || 'all'
@@ -315,6 +341,9 @@
       watchOverflow: true,
       roundLengths: true,
       centeredSlides: false,
+      observer: true,
+      observeParents: true,
+      resizeObserver: true,
       spaceBetween: 18,
       slidesPerView: 1,
       slidesPerGroup: 1,
@@ -330,8 +359,8 @@
       slidesOffsetBefore: 0,
       slidesOffsetAfter: 0,
       breakpoints: {
-        700: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 },
-        1181: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 }
+        1024: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 },
+        1181: { slidesPerView: 3, slidesPerGroup: 1, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 }
       }
     });
   }
@@ -540,23 +569,82 @@
   }
 
 
-  // Video slider: latest items on the home page, all items stay visible on videos.html
+  // Video slider: exact full-card navigation on phones/tablets.
   document.querySelectorAll('[data-video-slider]').forEach(slider=>{
     const track = slider.querySelector('.video-showcase__track');
     const prev = slider.querySelector('.video-slider__btn--prev');
     const next = slider.querySelector('.video-slider__btn--next');
     if(!track) return;
-    track.scrollLeft = 0;
-    window.addEventListener('resize', ()=>{
-      if(track.scrollLeft < 2) track.scrollLeft = 0;
-    }, {passive:true});
-    const scrollByPage = (direction)=>{
-      if(window.matchMedia('(min-width:1181px)').matches) return;
-      const amount = Math.max(track.clientWidth * 0.86, 260);
-      track.scrollBy({left: direction * amount, behavior:'smooth'});
+
+    let scrollTimer = 0;
+    let programmaticScroll = false;
+
+    const getStep = () => {
+      const card = track.querySelector('.video-card');
+      if(!card) return track.clientWidth;
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
     };
-    prev && prev.addEventListener('click', ()=>scrollByPage(-1));
-    next && next.addEventListener('click', ()=>scrollByPage(1));
+
+    const getMaxIndex = () => {
+      const step = getStep();
+      return step > 0 ? Math.max(0, Math.round((track.scrollWidth - track.clientWidth) / step)) : 0;
+    };
+
+    const scrollToIndex = (index, behavior = 'smooth') => {
+      if(window.matchMedia('(min-width:1181px)').matches){
+        track.scrollLeft = 0;
+        return;
+      }
+      const step = getStep();
+      const boundedIndex = Math.max(0, Math.min(index, getMaxIndex()));
+      programmaticScroll = true;
+      track.scrollTo({left: boundedIndex * step, behavior});
+      window.setTimeout(()=>{ programmaticScroll = false; }, behavior === 'smooth' ? 450 : 0);
+    };
+
+    const snapToNearestCard = (behavior = 'smooth') => {
+      if(window.matchMedia('(min-width:1181px)').matches) return;
+      const step = getStep();
+      if(!step) return;
+      scrollToIndex(Math.round(track.scrollLeft / step), behavior);
+    };
+
+    const move = (direction) => {
+      const step = getStep();
+      const currentIndex = step ? Math.round(track.scrollLeft / step) : 0;
+      scrollToIndex(currentIndex + direction);
+    };
+
+    prev?.addEventListener('click', ()=>move(-1));
+    next?.addEventListener('click', ()=>move(1));
+
+    track.addEventListener('scroll', ()=>{
+      if(programmaticScroll) return;
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(()=>snapToNearestCard('smooth'), 140);
+    }, {passive:true});
+
+    track.addEventListener('touchend', ()=>{
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(()=>snapToNearestCard('smooth'), 40);
+    }, {passive:true});
+
+    track.addEventListener('pointerup', ()=>{
+      if(window.matchMedia('(pointer:fine)').matches){
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(()=>snapToNearestCard('smooth'), 40);
+      }
+    });
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', ()=>{
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(()=>scrollToIndex(0, 'auto'), 80);
+    }, {passive:true});
+
+    scrollToIndex(0, 'auto');
   });
 
 })();
