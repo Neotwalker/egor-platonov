@@ -42,21 +42,14 @@
   hyphens:auto;
 }
 
-/* Fixed controls never compete with each other or with an active form. */
+/* Fixed controls alternate: the back-to-top button hides only while
+   the mobile quick-actions panel is actually visible. */
 @media (max-width:860px){
-  body.has-mobile-cta .back-to-top,
-  body.is-form-in-view .back-to-top{
+  body.has-mobile-cta .back-to-top{
     opacity:0 !important;
     visibility:hidden !important;
     pointer-events:none !important;
     transform:translateY(14px) !important;
-  }
-
-  body.is-form-in-view .mobile-bottom-cta{
-    opacity:0 !important;
-    visibility:hidden !important;
-    pointer-events:none !important;
-    transform:translateY(140%) !important;
   }
 
   /* Touch devices should not retain hover/raise states while swiping. */
@@ -103,4 +96,22 @@
   .lead-modal #modalTitle{
     font-size:clamp(1.75rem, 7.4vw, 2.2rem) !important;
   }
+}
+
+
+/* Reviews: every slide uses the height of the tallest review. */
+.reviews-swiper .swiper-wrapper{
+  align-items:stretch !important;
+}
+.reviews-swiper .swiper-slide.review-slide{
+  height:auto !important;
+}
+.reviews-swiper .review-slide__body{
+  display:flex !important;
+  flex-direction:column !important;
+  min-height:100% !important;
+}
+.reviews-swiper .review-slide em{
+  margin-top:auto !important;
+  padding-top:14px !important;
 }

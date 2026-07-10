@@ -341,10 +341,35 @@
   });
 
 
-  // Reviews slider
+  // Reviews: every card uses the height of the tallest review on the page
+  const allReviewSlides = [...document.querySelectorAll('.review-slide')];
+  let reviewEqualizeFrame = 0;
+  let reviewResizeTimer = 0;
+
+  const equalizeReviewSlides = () => {
+    window.cancelAnimationFrame(reviewEqualizeFrame);
+    reviewEqualizeFrame = window.requestAnimationFrame(() => {
+      allReviewSlides.forEach(slide => {
+        slide.style.minHeight = '';
+      });
+
+      if (!allReviewSlides.length) return;
+
+      const tallestHeight = Math.ceil(
+        Math.max(...allReviewSlides.map(slide => slide.scrollHeight))
+      );
+
+      allReviewSlides.forEach(slide => {
+        slide.style.minHeight = `${tallestHeight}px`;
+      });
+    });
+  };
+
   const reviewsSwiperEl = document.querySelector('[data-reviews-swiper]');
+  let reviewsSwiper = null;
+
   if (reviewsSwiperEl && typeof Swiper !== 'undefined') {
-    new Swiper(reviewsSwiperEl, {
+    reviewsSwiper = new Swiper(reviewsSwiperEl, {
       loop: false,
       rewind: true,
       speed: 650,
@@ -372,8 +397,30 @@
       breakpoints: {
         1024: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 },
         1181: { slidesPerView: 3, slidesPerGroup: 1, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 }
+      },
+      on: {
+        init: equalizeReviewSlides,
+        resize: equalizeReviewSlides,
+        breakpoint: equalizeReviewSlides
       }
     });
+  }
+
+  if (allReviewSlides.length) {
+    window.addEventListener('load', equalizeReviewSlides, {once:true});
+    window.addEventListener('resize', () => {
+      window.clearTimeout(reviewResizeTimer);
+      reviewResizeTimer = window.setTimeout(() => {
+        equalizeReviewSlides();
+        reviewsSwiper?.update();
+      }, 120);
+    }, {passive:true});
+    document.fonts?.ready?.then(() => {
+      equalizeReviewSlides();
+      reviewsSwiper?.update();
+    });
+
+    equalizeReviewSlides();
   }
 
   // Back to top button
@@ -508,21 +555,7 @@
     }, {threshold: 0.05});
     footerObserver.observe(siteFooter);
   }
-// Hide fixed mobile controls while a form or important CTA is in the viewport
-  const fixedActionBlockers = [
-    ...document.querySelectorAll('form:not(.quiz-form), .cta--3d, .service-cta, .archive-cta')
-  ];
-  if(fixedActionBlockers.length && 'IntersectionObserver' in window){
-    const visibleBlockers = new Set();
-    const blockerObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) visibleBlockers.add(entry.target);
-        else visibleBlockers.delete(entry.target);
-      });
-      body.classList.toggle('is-form-in-view', visibleBlockers.size > 0);
-    }, {rootMargin:'-8% 0px -18% 0px', threshold:0.08});
-    fixedActionBlockers.forEach(element=>blockerObserver.observe(element));
-  }
+// Fixed controls are governed only by scroll direction and CTA visibility.
 
   // Populate the only persistent hidden URL field on every form.
   document.querySelectorAll('input[name="lead_page_url"]').forEach(field=>{
