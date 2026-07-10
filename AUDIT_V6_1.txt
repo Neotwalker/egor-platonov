@@ -1,0 +1,20 @@
+V6.1 fixes audit
+
+Done:
+- Fixed .btn--dark / call links text visibility across Safari/iOS/Chromium.
+- Added arrow indicator to Services menu trigger.
+- Prevented decorative pseudo-elements from covering CTA/capsule/service-card content.
+- Fixed case-card modal context fields: lead_button_text now stores short CTA text, lead_service stores case title.
+- Removed duplicated Policy link from footer navigation; footer-bottom keeps the policy link.
+- Fixed .eyebrow::before shrinking on narrow widths.
+- Reduced mobile header logo/header height and made mobile nav full-screen.
+- Converted homepage video block into a latest-6 horizontal slider; videos.html keeps full video grid.
+- Improved mobile first content visibility on reviews.html and faq.html.
+- Added responsive 404.html.
+- Checked local static paths, duplicate IDs, JS syntax and CSS brace balance.
+
+Checks:
+- node --check assets/js/main.js: OK
+- duplicate id check: OK
+- local href/src paths: OK
+- CSS brace balance: OK

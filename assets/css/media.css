@@ -1312,3 +1312,56 @@
   .brand--image img{width:152px;max-height:54px}
   .video-card__body{padding:18px}
 }
+
+
+/* === v6.1 mobile/tablet fixes === */
+@media (max-width:1180px){
+  .video-showcase__track .video-card{flex-basis:calc((100% - 18px)/2)}
+  .video-page .video-showcase__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .brand--image img{width:132px !important;max-height:46px !important}
+  .header__row{min-height:68px !important}
+  .mobile-nav{
+    position:fixed !important;
+    inset:68px 0 0 0 !important;
+    z-index:999;
+    width:100vw !important;
+    max-width:none !important;
+    height:calc(100dvh - 68px) !important;
+    max-height:none !important;
+    padding:18px var(--container-pad) 28px !important;
+    background:rgba(255,255,255,.98);
+    box-shadow:0 24px 60px rgba(17,24,39,.16);
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+  @supports not (height:100dvh){.mobile-nav{height:calc(100vh - 68px) !important}}
+  .mobile-nav a{font-size:1rem}
+  body.is-mobile-menu-open{overflow:hidden}
+  .page-hero{padding:26px 0 20px !important}
+  .page-hero + .section{padding-top:34px !important}
+  .reviews-page-grid,.faq-list{margin-top:0 !important}
+  .video-slider__controls{justify-content:flex-start;margin:0 0 14px}
+  .video-slider__btn{width:48px;height:48px;border-radius:16px}
+  .video-slider__viewport{overflow:visible}
+  .video-showcase__track{
+    margin-inline:calc(var(--container-pad) * -1);
+    padding-inline:var(--container-pad);
+    overflow-x:auto !important;
+  }
+  .video-showcase__track .video-card{flex-basis:min(86vw,360px)}
+  .video-page .video-showcase__grid{grid-template-columns:1fr !important}
+  .error-help__grid{grid-template-columns:1fr}
+  .archive-service-search{width:100% !important;margin-bottom:16px !important}
+  .archive-service-search input[type="search"]{width:100% !important;min-height:54px;font-size:16px;white-space:normal;text-overflow:ellipsis}
+  .service-filter{min-height:48px;width:100%;white-space:normal}
+  .eyebrow{align-items:center}
+}
+@media (max-width:420px){
+  .brand--image img{width:120px !important;max-height:42px !important}
+  .header__row{min-height:64px !important}
+  .mobile-nav{inset:64px 0 0 0 !important;height:calc(100dvh - 64px) !important}
+  @supports not (height:100dvh){.mobile-nav{height:calc(100vh - 64px) !important}}
+  .page-hero h1{font-size:clamp(1.85rem,8.5vw,2.4rem) !important}
+}

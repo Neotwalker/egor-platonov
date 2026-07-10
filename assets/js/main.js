@@ -9,8 +9,9 @@
       const open = header.classList.toggle('is-open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       mobileNav.classList.toggle('is-open', open);
+      body.classList.toggle('is-mobile-menu-open', open);
     });
-    mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{header.classList.remove('is-open'); mobileNav.classList.remove('is-open');}));
+    mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{header.classList.remove('is-open'); mobileNav.classList.remove('is-open'); body.classList.remove('is-mobile-menu-open');}));
   }
 
   // Mega menu accessibility on click for touch devices
@@ -89,7 +90,7 @@
     const sourceText = trigger.getAttribute('data-lead-source')
       || trigger.getAttribute('data-b2b')
       || trigger.querySelector?.('h3')?.textContent?.trim()
-      || trigger.textContent?.trim()
+      || trigger.getAttribute('aria-label')
       || titleText;
     const serviceText = trigger.getAttribute('data-lead-service') || trigger.getAttribute('data-b2b') || '';
     const pageTitle = document.body.getAttribute('data-page-title') || document.title;
@@ -105,7 +106,7 @@
     setFieldValue(form, 'lead_service', serviceText);
     setFieldValue(form, 'lead_page_title', pageTitle);
     setFieldValue(form, 'lead_page_url', window.location.href);
-    setFieldValue(form, 'lead_button_text', trigger.textContent?.trim() || titleText);
+    setFieldValue(form, 'lead_button_text', trigger.getAttribute('data-lead-button-text') || trigger.querySelector?.('.text-link')?.textContent?.trim() || trigger.getAttribute('aria-label') || trigger.textContent?.trim() || titleText);
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden','false');
@@ -429,5 +430,20 @@
       },
     });
   }
+
+
+  // Video slider: latest items on the home page, all items stay visible on videos.html
+  document.querySelectorAll('[data-video-slider]').forEach(slider=>{
+    const track = slider.querySelector('.video-showcase__track');
+    const prev = slider.querySelector('.video-slider__btn--prev');
+    const next = slider.querySelector('.video-slider__btn--next');
+    if(!track) return;
+    const scrollByPage = (direction)=>{
+      const amount = Math.max(track.clientWidth * 0.86, 260);
+      track.scrollBy({left: direction * amount, behavior:'smooth'});
+    };
+    prev && prev.addEventListener('click', ()=>scrollByPage(-1));
+    next && next.addEventListener('click', ()=>scrollByPage(1));
+  });
 
 })();
