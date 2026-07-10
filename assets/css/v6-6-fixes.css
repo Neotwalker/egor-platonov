@@ -1,0 +1,151 @@
+
+/* ==========================================================================
+   v6.6 — case-card composition and true full-bleed slider viewports
+   Loaded after all previous styles.
+   ========================================================================== */
+
+/* Case cards: larger media, compact body and equalized content without empty voids. */
+#cases .case-grid{
+  align-items:stretch !important;
+}
+#cases .case-card{
+  display:grid !important;
+  grid-template-rows:auto 1fr !important;
+  height:auto !important;
+  min-height:0 !important;
+  align-self:stretch !important;
+  overflow:hidden !important;
+}
+#cases .case-card__image{
+  min-height:0;
+}
+#cases .case-card__image img{
+  display:block;
+  width:100% !important;
+  object-fit:cover !important;
+}
+#cases .case-card__body{
+  display:grid !important;
+  grid-template-rows:auto auto 1fr auto !important;
+  align-content:stretch !important;
+  flex:none !important;
+  height:auto !important;
+  min-height:0;
+  padding:22px !important;
+}
+#cases .case-card__body h3{
+  margin:0 !important;
+}
+#cases .case-card__meta{
+  margin:14px 0 16px !important;
+}
+#cases .case-card__body p{
+  margin:0 !important;
+  align-self:start;
+}
+#cases .case-card__body .text-link{
+  align-self:end;
+  margin-top:20px !important;
+  padding-top:0 !important;
+}
+
+
+#cases.is-measuring .case-grid{
+  align-items:flex-start !important;
+}
+#cases.is-measuring .case-card{
+  align-self:flex-start !important;
+}
+#cases.is-measuring .case-card__body{
+  min-height:0 !important;
+}
+
+/* Full-bleed slider clipping: movement is clipped only at the device edge. */
+@media (max-width:1180px){
+  .video-slider,
+  .reviews-swiper{
+    --slider-gutter:var(--container-gutter, 18px);
+  }
+
+  .video-slider__viewport{
+    width:calc(100% + (var(--slider-gutter) * 2)) !important;
+    max-width:none !important;
+    margin-inline:calc(var(--slider-gutter) * -1) !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    box-sizing:border-box !important;
+  }
+  .video-showcase__track{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:4px var(--slider-gutter) 18px !important;
+    gap:18px !important;
+    scroll-padding-inline:var(--slider-gutter) !important;
+    box-sizing:border-box !important;
+  }
+  .video-showcase__track .video-card{
+    flex:0 0 calc((100% - 18px) / 2) !important;
+    width:calc((100% - 18px) / 2) !important;
+    max-width:calc((100% - 18px) / 2) !important;
+  }
+
+  .reviews-swiper{
+    width:calc(100% + (var(--slider-gutter) * 2)) !important;
+    max-width:none !important;
+    margin-inline:calc(var(--slider-gutter) * -1) !important;
+    padding:4px var(--slider-gutter) 38px !important;
+    overflow:hidden !important;
+    box-sizing:border-box !important;
+    contain:none !important;
+  }
+  .reviews-swiper .swiper-wrapper{
+    align-items:stretch !important;
+  }
+  .reviews-swiper .swiper-slide{
+    height:auto !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  .reviews-swiper .review-slide{
+    height:100% !important;
+  }
+}
+
+@media (max-width:860px){
+  #cases .case-card__image img{
+    height:260px !important;
+  }
+  #cases .case-card__body{
+    padding:20px !important;
+  }
+  #cases .case-card__body .text-link{
+    margin-top:18px !important;
+  }
+}
+
+@media (max-width:767px){
+  .video-showcase__track{
+    gap:14px !important;
+  }
+  .video-showcase__track .video-card{
+    flex:0 0 100% !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+}
+
+@media (max-width:560px){
+  #cases .case-card__image img{
+    height:240px !important;
+  }
+  #cases .case-card__body{
+    padding:18px !important;
+  }
+  #cases .case-card__meta{
+    margin:12px 0 14px !important;
+  }
+  #cases .case-card__body .text-link{
+    margin-top:16px !important;
+  }
+}

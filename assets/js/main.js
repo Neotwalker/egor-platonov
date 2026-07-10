@@ -263,7 +263,7 @@
     updateQuiz();
   }
 
-  // Cases filter + equal-height cards
+  // Cases filter + compact equal-height card bodies
   document.querySelectorAll('#cases').forEach(section=>{
     const filterBar = section.querySelector('.case-filter');
     const buttons = [...section.querySelectorAll('.case-filter__btn')];
@@ -275,14 +275,29 @@
       window.cancelAnimationFrame(equalizeFrame);
       equalizeFrame = window.requestAnimationFrame(()=>{
         const visibleCards = cards.filter(card=>!card.hidden && !card.classList.contains('is-hidden'));
-        cards.forEach(card=>card.style.minHeight = '');
-        if(visibleCards.length < 2) return;
+        const bodies = visibleCards
+          .map(card=>card.querySelector('.case-card__body'))
+          .filter(Boolean);
 
-        const maxHeight = Math.ceil(
-          Math.max(...visibleCards.map(card=>card.getBoundingClientRect().height))
+        section.classList.add('is-measuring');
+        cards.forEach(card=>{
+          card.style.minHeight = '';
+          card.style.height = '';
+          const body = card.querySelector('.case-card__body');
+          if(body) body.style.minHeight = '';
+        });
+
+        if(bodies.length < 2){
+          section.classList.remove('is-measuring');
+          return;
+        }
+
+        const maxBodyHeight = Math.ceil(
+          Math.max(...bodies.map(body=>body.scrollHeight))
         );
-        visibleCards.forEach(card=>{
-          card.style.minHeight = `${maxHeight}px`;
+        section.classList.remove('is-measuring');
+        bodies.forEach(body=>{
+          body.style.minHeight = `${maxBodyHeight}px`;
         });
       });
     };
@@ -319,7 +334,7 @@
     let resizeTimer = 0;
     window.addEventListener('resize', ()=>{
       window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(equalizeCaseCards, 100);
+      resizeTimer = window.setTimeout(equalizeCaseCards, 120);
     }, {passive:true});
     window.addEventListener('load', equalizeCaseCards, {once:true});
     document.fonts?.ready?.then(equalizeCaseCards);
