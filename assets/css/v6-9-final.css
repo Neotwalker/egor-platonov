@@ -1,0 +1,251 @@
+
+/* ==========================================================================
+   v6.9 — content cleanup, service navigation, accessible forms and mobile UX
+   ========================================================================== */
+
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+/* Navigation inside long service pages */
+.service-page-index{
+  position:relative;
+  z-index:20;
+  border-bottom:1px solid rgba(17,24,39,.08);
+  background:rgba(255,255,255,.94);
+}
+.service-page-nav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.service-page-nav::-webkit-scrollbar{display:none}
+.service-page-nav a{
+  flex:0 0 auto;
+  min-height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:9px 16px;
+  border:1px solid rgba(17,24,39,.1);
+  border-radius:999px;
+  background:#fff;
+  color:var(--ink);
+  font-weight:800;
+  transition:border-color .2s ease,color .2s ease,background-color .2s ease;
+}
+.service-page-nav a:hover,
+.service-page-nav a:focus-visible{
+  color:#9a4b00;
+  border-color:rgba(255,122,0,.4);
+  background:#fff8f1;
+}
+.service-page-nav-mobile{display:none}
+
+/* Catalogue search states */
+.archive-service-search{
+  display:grid;
+  gap:10px;
+}
+.archive-service-search__field{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.archive-service-search__field::before{
+  content:"";
+  position:absolute;
+  left:18px;
+  width:20px;
+  height:20px;
+  pointer-events:none;
+  opacity:.58;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+}
+.archive-service-search input[type="search"]{
+  width:100%;
+  min-width:0;
+  min-height:58px;
+  padding:14px 122px 14px 52px;
+}
+.catalog-search-clear{
+  position:absolute;
+  right:9px;
+  min-height:40px;
+  padding:8px 14px;
+  border:0;
+  border-radius:12px;
+  background:#fff1e3;
+  color:#9a4b00;
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+}
+.catalog-search-clear[hidden]{display:none!important}
+.catalog-search-status{
+  margin:0;
+  color:var(--muted);
+  font-size:.94rem;
+}
+.catalog-empty{
+  margin-top:22px;
+  padding:28px;
+  border:1px solid rgba(17,24,39,.09);
+  border-radius:24px;
+  background:#fffaf5;
+  text-align:center;
+}
+.catalog-empty[hidden]{display:none!important}
+.catalog-empty h3{margin:0 0 8px}
+.catalog-empty p{max-width:650px;margin:0 auto;color:var(--muted)}
+
+/* Removed duplicate sections must not leave excessive gaps */
+#about + #services{padding-top:clamp(54px,7vw,92px)}
+#map-seo + #contacts{padding-top:clamp(52px,7vw,88px)}
+
+@media (max-width:1023px){
+  /* Reduce horizontal swipe fatigue: video becomes a simple recent-items grid. */
+  .video-slider__controls{display:none!important}
+  .video-slider__viewport{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .video-showcase__track{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:16px!important;
+    width:100%!important;
+    max-width:100%!important;
+    padding:0!important;
+    margin:0!important;
+    overflow:visible!important;
+  }
+  .video-showcase__track .video-card{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+  .video-showcase__track .video-card:nth-child(n+3){display:none!important}
+
+  /* Services and supporting cards use regular grids, not horizontal carousels. */
+  #services .service-grid,
+  .service-related .service-grid--related,
+  .why-grid,
+  .owner-points{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+
+  /* Stages become a scannable vertical timeline. */
+  .stages-grid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .stages-grid .timeline-item{
+    min-width:0!important;
+    display:grid;
+    grid-template-columns:48px 1fr;
+    column-gap:14px;
+    align-items:start;
+  }
+  .stages-grid .timeline-item b{grid-row:1/3}
+  .stages-grid .timeline-item h3,
+  .stages-grid .timeline-item p{grid-column:2;margin-left:0}
+
+  .service-page-nav{display:none}
+  .service-page-nav-mobile{
+    display:block;
+    padding:10px 0;
+  }
+  .service-page-nav-mobile summary{
+    min-height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:11px 16px;
+    border:1px solid rgba(17,24,39,.1);
+    border-radius:14px;
+    background:#fff;
+    color:var(--ink);
+    font-weight:850;
+    cursor:pointer;
+    list-style:none;
+  }
+  .service-page-nav-mobile summary::-webkit-details-marker{display:none}
+  .service-page-nav-mobile summary::after{
+    content:"+";
+    font-size:1.25rem;
+    line-height:1;
+  }
+  .service-page-nav-mobile[open] summary::after{content:"−"}
+  .service-page-nav-mobile nav{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    padding:10px 0 2px;
+  }
+  .service-page-nav-mobile a{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:9px 10px;
+    border:1px solid rgba(17,24,39,.09);
+    border-radius:12px;
+    background:#fff;
+    color:var(--ink);
+    font-weight:750;
+    text-align:center;
+  }
+}
+
+@media (max-width:600px){
+  .video-showcase__track,
+  #services .service-grid,
+  .service-related .service-grid--related,
+  .why-grid,
+  .owner-points{
+    grid-template-columns:1fr!important;
+  }
+  .service-page-nav-mobile nav{grid-template-columns:1fr}
+  .archive-service-search__field{display:block}
+  .archive-service-search input[type="search"]{
+    min-height:54px;
+    padding-right:104px;
+    font-size:16px;
+  }
+  .catalog-search-clear{
+    right:7px;
+    top:7px;
+    min-height:40px;
+    padding-inline:11px;
+    font-size:.88rem;
+  }
+  .catalog-empty{padding:22px 18px}
+}
