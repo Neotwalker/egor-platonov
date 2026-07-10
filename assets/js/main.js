@@ -5,13 +5,19 @@
   const burger = document.querySelector('.burger');
   const mobileNav = document.querySelector('.mobile-nav');
   if(burger && header && mobileNav){
-    burger.addEventListener('click', ()=>{
-      const open = header.classList.toggle('is-open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    const setMobileMenu = (open) => {
+      header.classList.toggle('is-open', open);
       mobileNav.classList.toggle('is-open', open);
       body.classList.toggle('is-mobile-menu-open', open);
-    });
-    mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{header.classList.remove('is-open'); mobileNav.classList.remove('is-open'); body.classList.remove('is-mobile-menu-open');}));
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    };
+    setMobileMenu(false);
+    burger.addEventListener('click', ()=>setMobileMenu(!header.classList.contains('is-open')));
+    mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>setMobileMenu(false)));
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') setMobileMenu(false); });
+    window.addEventListener('resize', ()=>{ if(window.innerWidth > 860) setMobileMenu(false); });
   }
 
   // Mega menu accessibility on click for touch devices
@@ -224,9 +230,11 @@
         el: '.reviews-pagination',
         clickable: true
       },
+      slidesOffsetBefore: 12,
+      slidesOffsetAfter: 12,
       breakpoints: {
-        700: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 18 },
-        1180: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 18 }
+        700: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 18, slidesOffsetBefore: 18, slidesOffsetAfter: 18 },
+        1181: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 }
       }
     });
   }
@@ -439,6 +447,7 @@
     const next = slider.querySelector('.video-slider__btn--next');
     if(!track) return;
     const scrollByPage = (direction)=>{
+      if(window.matchMedia('(min-width:1181px)').matches) return;
       const amount = Math.max(track.clientWidth * 0.86, 260);
       track.scrollBy({left: direction * amount, behavior:'smooth'});
     };
