@@ -20,6 +20,67 @@
     window.addEventListener('resize', ()=>{ if(window.innerWidth > 860) setMobileMenu(false); });
   }
 
+
+  // Reliable hash navigation with a fixed header, including iOS Safari.
+  const scrollToCurrentHash = (behavior = 'auto') => {
+    const rawHash = window.location.hash;
+    if(!rawHash || rawHash.length < 2) return;
+    let target = null;
+    try{
+      target = document.getElementById(decodeURIComponent(rawHash.slice(1)));
+    }catch(error){
+      target = document.querySelector(rawHash);
+    }
+    if(!target) return;
+
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const top = Math.max(
+      0,
+      target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 14
+    );
+    window.scrollTo({top, behavior});
+  };
+
+  document.addEventListener('click', event=>{
+    const link = event.target.closest('a[href*="#"]');
+    if(!link) return;
+
+    let url;
+    try{
+      url = new URL(link.href, window.location.href);
+    }catch(error){
+      return;
+    }
+
+    const sameDocument =
+      url.origin === window.location.origin &&
+      url.pathname.replace(/\/+$/, '') === window.location.pathname.replace(/\/+$/, '');
+
+    if(!sameDocument || !url.hash) return;
+    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if(!target) return;
+
+    event.preventDefault();
+    history.pushState(null, '', url.hash);
+    if(header?.classList.contains('is-open')){
+      header.classList.remove('is-open');
+      mobileNav?.classList.remove('is-open');
+      body.classList.remove('is-mobile-menu-open');
+      burger?.setAttribute('aria-expanded', 'false');
+      burger?.setAttribute('aria-label', 'Открыть меню');
+      mobileNav?.setAttribute('aria-hidden', 'true');
+    }
+    window.requestAnimationFrame(()=>scrollToCurrentHash('smooth'));
+  });
+
+  if(window.location.hash){
+    window.requestAnimationFrame(()=>scrollToCurrentHash('auto'));
+    window.addEventListener('load', ()=>{
+      window.setTimeout(()=>scrollToCurrentHash('auto'), 80);
+      window.setTimeout(()=>scrollToCurrentHash('auto'), 420);
+    }, {once:true});
+  }
+
   // Mega menu accessibility on click for touch devices
   document.querySelectorAll('.nav-trigger').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
@@ -203,27 +264,57 @@
   }
 
   // Cases filter
-  const filterButtons = document.querySelectorAll('.case-filter__btn');
-  const cases = document.querySelectorAll('.case-card[data-case-type]');
-  filterButtons.forEach(btn=>btn.addEventListener('click', ()=>{
-    filterButtons.forEach(b=>b.classList.remove('is-active'));
-    btn.classList.add('is-active');
-    const filter = btn.getAttribute('data-filter');
-    cases.forEach(card=>{
-      const show = filter === 'all' || card.getAttribute('data-case-type') === filter;
-      card.classList.toggle('is-hidden', !show);
+  document.querySelectorAll('#cases').forEach(section=>{
+    const filterBar = section.querySelector('.case-filter');
+    const buttons = [...section.querySelectorAll('.case-filter__btn')];
+    const cards = [...section.querySelectorAll('.case-card[data-case-type]')];
+    if(!filterBar || !buttons.length || !cards.length) return;
+
+    const applyCaseFilter = (filter) => {
+      buttons.forEach(button=>{
+        const active = button.dataset.filter === filter;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      cards.forEach(card=>{
+        const visible = filter === 'all' || card.dataset.caseType === filter;
+        card.hidden = !visible;
+        card.classList.toggle('is-hidden', !visible);
+        card.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      });
+
+      const grid = section.querySelector('.case-grid');
+      if(grid && grid.scrollLeft){
+        grid.scrollTo({left:0, behavior:'smooth'});
+      }
+    };
+
+    filterBar.addEventListener('click', event=>{
+      const button = event.target.closest('.case-filter__btn');
+      if(!button || !filterBar.contains(button)) return;
+      event.preventDefault();
+      applyCaseFilter(button.dataset.filter || 'all');
     });
-  }));
+
+    applyCaseFilter(
+      buttons.find(button=>button.classList.contains('is-active'))?.dataset.filter || 'all'
+    );
+  });
 
 
   // Reviews slider
   const reviewsSwiperEl = document.querySelector('[data-reviews-swiper]');
   if (reviewsSwiperEl && typeof Swiper !== 'undefined') {
     new Swiper(reviewsSwiperEl, {
-      loop: true,
+      loop: false,
+      rewind: true,
       speed: 650,
       grabCursor: true,
       watchOverflow: true,
+      roundLengths: true,
+      centeredSlides: false,
       spaceBetween: 18,
       slidesPerView: 1,
       slidesPerGroup: 1,
