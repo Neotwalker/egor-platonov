@@ -38,6 +38,12 @@
   const observer = new IntersectionObserver((entries)=>{entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('is-visible'); });}, {threshold:.14});
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+
+  // Critical first content on archive pages must never remain hidden on mobile Safari.
+  document.querySelectorAll('.page-hero--videos + .section > .container, .page-hero--reviews + .section > .container, .page-hero--faq + .section > .container').forEach(el=>{
+    el.classList.add('is-visible');
+  });
+
   // Tilt cards
   const tilts = document.querySelectorAll('.tilt-card, [data-tilt]');
   const isFinePointer = window.matchMedia('(pointer:fine)').matches;
@@ -230,10 +236,10 @@
         el: '.reviews-pagination',
         clickable: true
       },
-      slidesOffsetBefore: 12,
-      slidesOffsetAfter: 12,
+      slidesOffsetBefore: 0,
+      slidesOffsetAfter: 0,
       breakpoints: {
-        700: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 18, slidesOffsetBefore: 18, slidesOffsetAfter: 18 },
+        700: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 },
         1181: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 }
       }
     });
@@ -339,20 +345,23 @@
   const mobileBottomCta = document.querySelector('.mobile-bottom-cta');
   if(mobileBottomCta){
     let lastScrollY = window.scrollY;
+    const setMobileCtaVisible = (visible) => {
+      mobileBottomCta.classList.toggle('is-visible', visible);
+      mobileBottomCta.classList.toggle('is-hidden-by-scroll', !visible);
+      body.classList.toggle('has-mobile-cta', visible);
+    };
     const updateMobileCta = () => {
       const currentY = window.scrollY;
       const isMobile = window.matchMedia('(max-width: 860px)').matches;
-      if(!isMobile || currentY < 180){
-        mobileBottomCta.classList.remove('is-visible');
-        mobileBottomCta.classList.add('is-hidden-by-scroll');
+      if(!isMobile || currentY < 180 || body.classList.contains('is-mobile-menu-open')){
+        setMobileCtaVisible(false);
         lastScrollY = currentY;
         return;
       }
-      if(currentY > lastScrollY){
-        mobileBottomCta.classList.add('is-visible');
-        mobileBottomCta.classList.remove('is-hidden-by-scroll');
-      } else if(currentY < lastScrollY){
-        mobileBottomCta.classList.add('is-hidden-by-scroll');
+      if(currentY > lastScrollY + 3){
+        setMobileCtaVisible(true);
+      } else if(currentY < lastScrollY - 3){
+        setMobileCtaVisible(false);
       }
       lastScrollY = currentY;
     };
@@ -446,6 +455,10 @@
     const prev = slider.querySelector('.video-slider__btn--prev');
     const next = slider.querySelector('.video-slider__btn--next');
     if(!track) return;
+    track.scrollLeft = 0;
+    window.addEventListener('resize', ()=>{
+      if(track.scrollLeft < 2) track.scrollLeft = 0;
+    }, {passive:true});
     const scrollByPage = (direction)=>{
       if(window.matchMedia('(min-width:1181px)').matches) return;
       const amount = Math.max(track.clientWidth * 0.86, 260);
