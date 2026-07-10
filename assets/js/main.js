@@ -162,11 +162,11 @@
     const submitText = trigger.getAttribute('data-lead-submit') || (action === 'discuss' ? 'Обсудить объект' : 'Получить смету');
     const sourceText = trigger.getAttribute('data-lead-source')
       || trigger.getAttribute('data-b2b')
-      || trigger.querySelector?.('h3')?.textContent?.trim()
+      || trigger.getAttribute('data-lead-button-text')
+      || trigger.querySelector?.('.text-link')?.textContent?.trim()
       || trigger.getAttribute('aria-label')
+      || (trigger.matches('button,a') ? trigger.textContent?.trim() : '')
       || titleText;
-    const serviceText = trigger.getAttribute('data-lead-service') || trigger.getAttribute('data-b2b') || '';
-    const pageTitle = document.body.getAttribute('data-page-title') || document.title;
     const form = modal.querySelector('form');
 
     if(modalTitle) modalTitle.textContent = titleText;
@@ -174,12 +174,8 @@
     if(modalEyebrow) modalEyebrow.textContent = action === 'discuss' ? 'Консультация' : 'Заявка на смету';
     if(modalSubmit) modalSubmit.textContent = submitText;
 
-    setFieldValue(form, 'lead_action', action);
     setFieldValue(form, 'lead_source', sourceText);
-    setFieldValue(form, 'lead_service', serviceText);
-    setFieldValue(form, 'lead_page_title', pageTitle);
     setFieldValue(form, 'lead_page_url', window.location.href);
-    setFieldValue(form, 'lead_button_text', trigger.getAttribute('data-lead-button-text') || trigger.querySelector?.('.text-link')?.textContent?.trim() || trigger.getAttribute('aria-label') || trigger.textContent?.trim() || titleText);
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden','false');
@@ -505,14 +501,35 @@
     updateMobileCta();
   }
 // Hide fixed mobile actions when the footer is visible
-  const siteFooter = document.querySelector('.site-footer');
+  const siteFooter = document.querySelector('.footer, .site-footer');
   if(siteFooter && 'IntersectionObserver' in window){
     const footerObserver = new IntersectionObserver((entries)=>{
       document.body.classList.toggle('is-footer-in-view', entries[0].isIntersecting);
     }, {threshold: 0.05});
     footerObserver.observe(siteFooter);
   }
-// File upload status and selected-file counter
+// Hide fixed mobile controls while a form or important CTA is in the viewport
+  const fixedActionBlockers = [
+    ...document.querySelectorAll('form:not(.quiz-form), .cta--3d, .service-cta, .archive-cta')
+  ];
+  if(fixedActionBlockers.length && 'IntersectionObserver' in window){
+    const visibleBlockers = new Set();
+    const blockerObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) visibleBlockers.add(entry.target);
+        else visibleBlockers.delete(entry.target);
+      });
+      body.classList.toggle('is-form-in-view', visibleBlockers.size > 0);
+    }, {rootMargin:'-8% 0px -18% 0px', threshold:0.08});
+    fixedActionBlockers.forEach(element=>blockerObserver.observe(element));
+  }
+
+  // Populate the only persistent hidden URL field on every form.
+  document.querySelectorAll('input[name="lead_page_url"]').forEach(field=>{
+    field.value = window.location.href;
+  });
+
+  // File upload status and selected-file counter
   const updateFileUploadState = (input) => {
     const label = input.closest('.file-upload');
     if(!label) return;

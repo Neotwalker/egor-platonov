@@ -40,16 +40,14 @@ Important attributes:
 </button>
 ```
 
-Hidden fields already exist in the modal form and can be transferred to CF7:
+Only two hidden fields are used and should be transferred to CF7:
 
 ```text
-[hidden lead_action]
 [hidden lead_source]
-[hidden lead_service]
-[hidden lead_page_title]
 [hidden lead_page_url]
-[hidden lead_button_text]
 ```
+
+`lead_source` contains a short readable source such as `Получить смету`, `Офисы`, `Магазины` or `Кейс: Производственный объект 1 250 м²`. `lead_page_url` contains the page URL.
 
 Recommended CF7 fields:
 
@@ -61,19 +59,16 @@ Recommended CF7 fields:
 [textarea message placeholder "Комментарий"]
 [file files limit:20mb filetypes:jpg|jpeg|png|webp|pdf|doc|docx|xls|xlsx]
 [acceptance policy] Отправляя заявку, Вы принимаете и соглашаетесь с Политикой конфиденциальности [/acceptance]
-[hidden lead_action]
 [hidden lead_source]
-[hidden lead_service]
-[hidden lead_page_title]
 [hidden lead_page_url]
-[hidden lead_button_text]
 [submit "Отправить"]
 ```
 
 ## CTA logic
 
-- `Получить смету` opens the modal with `lead_action=estimate`.
-- `Обсудить объект` opens the same modal with `lead_action=discuss`.
+- `Получить смету` opens the contextual lead modal and records `lead_source=Получить смету`.
+- Buttons such as `Офисы`, `Магазины` and case cards record their own short `lead_source`.
+- `Обсудить объект` opens the same modal with the source of the clicked block.
 - `Позвонить` is a direct `tel:` link and does not open a modal.
 
 This keeps the UI clean and makes lead sources readable in Flamingo/CRM.
