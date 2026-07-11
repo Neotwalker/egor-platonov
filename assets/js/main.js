@@ -341,17 +341,10 @@
   });
 
 
-  // Reviews: local native carousel without external libraries
+  // Reviews: every card uses the height of the tallest review on the page
   const allReviewSlides = [...document.querySelectorAll('.review-slide')];
-  const reviewsRoot = document.querySelector('[data-reviews-swiper]');
   let reviewEqualizeFrame = 0;
   let reviewResizeTimer = 0;
-
-  const getReviewsPerView = () => {
-    if(window.innerWidth >= 1181) return 3;
-    if(window.innerWidth >= 1024) return 2;
-    return 1;
-  };
 
   const equalizeReviewSlides = () => {
     window.cancelAnimationFrame(reviewEqualizeFrame);
@@ -360,7 +353,7 @@
         slide.style.minHeight = '';
       });
 
-      if(!allReviewSlides.length) return;
+      if (!allReviewSlides.length) return;
 
       const tallestHeight = Math.ceil(
         Math.max(...allReviewSlides.map(slide => slide.scrollHeight))
@@ -372,124 +365,62 @@
     });
   };
 
-  if(reviewsRoot){
-    const track = reviewsRoot.querySelector('.swiper-wrapper');
-    const slides = [...reviewsRoot.querySelectorAll('.review-slide')];
-    const prevButton = document.querySelector('.review-prev');
-    const nextButton = document.querySelector('.review-next');
-    const pagination = reviewsRoot.querySelector('.reviews-pagination');
-    let currentPage = 0;
-    let scrollTimer = 0;
+  const reviewsSwiperEl = document.querySelector('[data-reviews-swiper]');
+  let reviewsSwiper = null;
 
-    const getPageCount = () => Math.max(1, Math.ceil(slides.length / getReviewsPerView()));
-
-    const getSlideTarget = (pageIndex) => {
-      const perView = getReviewsPerView();
-      const slideIndex = Math.min(pageIndex * perView, Math.max(0, slides.length - perView));
-      const slide = slides[slideIndex];
-      if(!slide || !track) return 0;
-      const trackStyles = window.getComputedStyle(track);
-      const paddingLeft = parseFloat(trackStyles.paddingLeft) || 0;
-      return Math.max(0, slide.offsetLeft - paddingLeft);
-    };
-
-    const updatePagination = () => {
-      if(!pagination) return;
-      const pageCount = getPageCount();
-      currentPage = Math.min(currentPage, pageCount - 1);
-      pagination.innerHTML = '';
-
-      for(let index = 0; index < pageCount; index += 1){
-        const bullet = document.createElement('button');
-        bullet.type = 'button';
-        bullet.className = 'reviews-pagination__bullet';
-        bullet.classList.toggle('is-active', index === currentPage);
-        bullet.setAttribute('aria-label', `Перейти к группе отзывов ${index + 1}`);
-        bullet.setAttribute('aria-current', index === currentPage ? 'true' : 'false');
-        bullet.addEventListener('click', () => scrollToPage(index));
-        pagination.appendChild(bullet);
+  if (reviewsSwiperEl && typeof Swiper !== 'undefined') {
+    reviewsSwiper = new Swiper(reviewsSwiperEl, {
+      loop: false,
+      rewind: true,
+      speed: 650,
+      grabCursor: true,
+      watchOverflow: true,
+      roundLengths: true,
+      centeredSlides: false,
+      observer: true,
+      observeParents: true,
+      resizeObserver: true,
+      spaceBetween: 18,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      autoplay: false,
+      navigation: {
+        nextEl: '.review-next',
+        prevEl: '.review-prev'
+      },
+      pagination: {
+        el: '.reviews-pagination',
+        clickable: true
+      },
+      slidesOffsetBefore: 0,
+      slidesOffsetAfter: 0,
+      breakpoints: {
+        1024: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 },
+        1181: { slidesPerView: 3, slidesPerGroup: 1, spaceBetween: 18, slidesOffsetBefore: 0, slidesOffsetAfter: 0 }
+      },
+      on: {
+        init: equalizeReviewSlides,
+        resize: equalizeReviewSlides,
+        breakpoint: equalizeReviewSlides
       }
-    };
+    });
+  }
 
-    const setActivePage = (pageIndex) => {
-      currentPage = Math.max(0, Math.min(pageIndex, getPageCount() - 1));
-      pagination?.querySelectorAll('.reviews-pagination__bullet').forEach((bullet, index) => {
-        const active = index === currentPage;
-        bullet.classList.toggle('is-active', active);
-        bullet.setAttribute('aria-current', active ? 'true' : 'false');
-      });
-    };
-
-    const scrollToPage = (pageIndex, behavior = 'smooth') => {
-      if(!track) return;
-      const pageCount = getPageCount();
-      let targetPage = pageIndex;
-
-      if(targetPage < 0) targetPage = pageCount - 1;
-      if(targetPage >= pageCount) targetPage = 0;
-
-      setActivePage(targetPage);
-      track.scrollTo({
-        left: getSlideTarget(targetPage),
-        behavior
-      });
-    };
-
-    const detectCurrentPage = () => {
-      if(!track) return;
-      const pageCount = getPageCount();
-      let nearestPage = 0;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-
-      for(let index = 0; index < pageCount; index += 1){
-        const distance = Math.abs(track.scrollLeft - getSlideTarget(index));
-        if(distance < nearestDistance){
-          nearestDistance = distance;
-          nearestPage = index;
-        }
-      }
-
-      setActivePage(nearestPage);
-    };
-
-    prevButton?.addEventListener('click', () => scrollToPage(currentPage - 1));
-    nextButton?.addEventListener('click', () => scrollToPage(currentPage + 1));
-
-    track?.addEventListener('scroll', () => {
-      window.clearTimeout(scrollTimer);
-      scrollTimer = window.setTimeout(detectCurrentPage, 90);
-    }, {passive:true});
-
-    updatePagination();
-    equalizeReviewSlides();
-
+  if (allReviewSlides.length) {
+    window.addEventListener('load', equalizeReviewSlides, {once:true});
     window.addEventListener('resize', () => {
       window.clearTimeout(reviewResizeTimer);
       reviewResizeTimer = window.setTimeout(() => {
-        updatePagination();
         equalizeReviewSlides();
-        scrollToPage(currentPage, 'auto');
+        reviewsSwiper?.update();
       }, 120);
     }, {passive:true});
-
-    window.addEventListener('load', () => {
-      updatePagination();
-      equalizeReviewSlides();
-      scrollToPage(0, 'auto');
-    }, {once:true});
-
     document.fonts?.ready?.then(() => {
-      updatePagination();
       equalizeReviewSlides();
-      scrollToPage(currentPage, 'auto');
+      reviewsSwiper?.update();
     });
-  } else if(allReviewSlides.length){
+
     equalizeReviewSlides();
-    window.addEventListener('resize', () => {
-      window.clearTimeout(reviewResizeTimer);
-      reviewResizeTimer = window.setTimeout(equalizeReviewSlides, 120);
-    }, {passive:true});
-    document.fonts?.ready?.then(equalizeReviewSlides);
   }
 
   // Back to top button
@@ -683,91 +614,25 @@
     updateCatalog();
   }
 
-  // Local accessible video lightbox without external libraries
-  const videoGalleryLinks = [...document.querySelectorAll('[data-fancybox="site-videos"]')];
 
-  if(videoGalleryLinks.length){
-    const lightbox = document.createElement('div');
-    lightbox.className = 'media-lightbox';
-    lightbox.setAttribute('aria-hidden', 'true');
-    lightbox.innerHTML = `
-      <div class="media-lightbox__backdrop" data-media-close></div>
-      <div class="media-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="mediaLightboxCaption">
-        <button class="media-lightbox__close" type="button" aria-label="Закрыть видео" data-media-close>×</button>
-        <div class="media-lightbox__frame">
-          <iframe
-            title="Видео с объекта"
-            loading="eager"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <div class="media-lightbox__footer">
-          <p class="media-lightbox__caption" id="mediaLightboxCaption"></p>
-          <a class="btn btn--outline media-lightbox__external" href="#" target="_blank" rel="noopener">
-            Открыть источник
-          </a>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(lightbox);
-
-    const lightboxDialog = lightbox.querySelector('.media-lightbox__dialog');
-    const lightboxIframe = lightbox.querySelector('iframe');
-    const lightboxCaption = lightbox.querySelector('.media-lightbox__caption');
-    const lightboxExternal = lightbox.querySelector('.media-lightbox__external');
-    let lastVideoTrigger = null;
-
-    const closeVideoLightbox = () => {
-      lightbox.classList.remove('is-open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('is-media-lightbox-open');
-      if(lightboxIframe) lightboxIframe.src = 'about:blank';
-      window.setTimeout(() => lastVideoTrigger?.focus(), 30);
-    };
-
-    const openVideoLightbox = (trigger) => {
-      const source = trigger.getAttribute('href');
-      if(!source) return;
-
-      lastVideoTrigger = trigger;
-      const caption = trigger.getAttribute('data-caption')
-        || trigger.querySelector('h3')?.textContent?.trim()
-        || 'Видео с объекта';
-
-      if(lightboxIframe){
-        lightboxIframe.src = source;
-        lightboxIframe.title = caption;
-      }
-      if(lightboxCaption) lightboxCaption.textContent = caption;
-      if(lightboxExternal) lightboxExternal.href = source;
-
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('is-media-lightbox-open');
-      lightbox.querySelector('.media-lightbox__close')?.focus();
-    };
-
-    videoGalleryLinks.forEach(link => {
-      link.addEventListener('click', event => {
-        event.preventDefault();
-        openVideoLightbox(link);
-      });
-    });
-
-    lightbox.addEventListener('click', event => {
-      if(event.target.closest('[data-media-close]')){
-        closeVideoLightbox();
-      }
-    });
-
-    document.addEventListener('keydown', event => {
-      if(event.key === 'Escape' && lightbox.classList.contains('is-open')){
-        closeVideoLightbox();
-      }
+  // Fancybox video gallery initialization
+  if (window.Fancybox) {
+    Fancybox.bind('[data-fancybox="site-videos"]', {
+      animated: true,
+      dragToClose: true,
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ['close'],
+        },
+      },
+      iframe: {
+        preload: false,
+      },
     });
   }
+
 
   // Video slider: exact full-card navigation on phones/tablets.
   document.querySelectorAll('[data-video-slider]').forEach(slider=>{
